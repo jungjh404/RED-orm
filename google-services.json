@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "332601138077",
+    "project_id": "dormitory-application",
+    "storage_bucket": "dormitory-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332601138077:android:2918b9998bd9bad8892d74",
+        "android_client_info": {
+          "package_name": "cs.skku.edu.dorm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332601138077-v4gklv0qcmn1pc8o4om1e004scpmu48o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy95AQd36CFZj9V6C68XPpd-nF0u8bbbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332601138077-v4gklv0qcmn1pc8o4om1e004scpmu48o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
