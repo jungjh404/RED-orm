@@ -1,0 +1,20 @@
+{% if context_list %}
+    <ul>
+    {% for context in context_list %}
+        <li>
+            <a href="{% url 'dorms:detail' context.id %}">{{ context.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>글이 없습니다.</p>
+{% endif %}
+<!--부트스탧 사용-->
+<!--<a href=  "{% url 'dorms:context_create' %}" class = "btn btn-primary">질문등록하기</a>-->
+<a href=  "{% url 'dorms:context_create' %}">질문등록하기</a>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'common:logout' %}">로그아웃</a>
+{% else %}
+    <p>로그인 되어 있지 않습니다.</p>
+{% endif %}
