@@ -1,0 +1,11 @@
+{% extends 'dorms/base.html' %}
+{% block content %}
+<div class = "container">
+  <h5>게시글등록</h5>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button type="submit">저장하기</button>
+  </form>
+</div>
+{% endblock %}
