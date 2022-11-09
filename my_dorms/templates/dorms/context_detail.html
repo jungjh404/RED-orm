@@ -1,0 +1,56 @@
+<!--CSS 부분-->
+{% load static %}
+<link rel="stylesheet" type = "text/css" href = "{% static 'style.css' %}">
+
+<h1>{{content.title}}</h1>
+<div>
+    {{content.content}}
+</div>
+<div>
+    {{content.writer.username}}
+</div>
+<div>
+    {{content.date}}
+</div>
+
+<div class="my-3">
+    {% if request.user == content.writer %}
+        <a href="{% url 'dorms:context_modify' content.id  %}"  class="btn btn-sm btn-outline-secondary">수정</a>
+    {% endif %}
+</div>
+
+<h5> {{comment_list.count}}개의 답변이 있습니다.</h5>
+{% if comment_list %}
+<ul>
+    {% for comment in comment_list %}
+    <li>
+        <div>
+            {{comment.content}}
+            {{comment.writer.username}}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>답변이 없습니다.</p>
+{% endif %}
+
+<form method="post" action = "{% url 'dorms:comment_create' content.id %}">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for field in form %}
+        {% if field.errors %}
+        <div>
+            <strong>{{field.label}}</strong>
+            <span style="color: red;"> {{field.errors}} </span>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="form-group">
+        <textarea {% if not user.is_authenticated %} disabled {% endif %} name = "content" id="content" rows="15"></textarea>
+    </div>
+    <input type="submit" value="답변등록" class="btn btn-primary">
+</form>
