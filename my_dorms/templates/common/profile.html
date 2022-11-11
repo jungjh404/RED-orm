@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% load static %}
+
+  <div class="header">
+      <h3>마이페이지</h3>
+  </div>
+  <!-- 네비게이션바 -->
+
+  <div class="mainContent">
+      <div class="pageTitle">
+          <p>내 정보</p>
+      </div>
+      <table class="userInfo">
+          <tr>
+              <td>이름</td>
+              {% comment %} <td>김명륜</td> {% endcomment %}
+              <td>{{ user.name }}</td>
+          </tr>
+          <tr>
+            <td>성별</td>
+            {% comment %} <td>5학기</td> {% endcomment %}
+            <td>{{ user.gender }}</td>
+          </tr>
+          <tr>
+            <td>기숙사 건물</td>
+            {% comment %} <td>신관A</td> {% endcomment %}
+            <td>{{ user.building }}</td>
+          </tr>
+          <tr>
+            <td>방 호수</td>
+            {% comment %} <td>102</td> {% endcomment %}
+              <td>{{ user.room_num }}</td>
+          </tr>
+      </table>
+      <a href="{% url 'common:profile_update' %}">프로필 수정</a>
+  </div>

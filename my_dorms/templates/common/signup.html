@@ -28,15 +28,23 @@
         value="{{ form.username.value|default_if_none:'' }}">
     </div>
 
+<!--    여학생 또는 남학생-->
+    <div class="mb-3">
+      <label for="gender">성별</label>
+      <input type="text" class="form-control" name="gender" id="gender"
+        value="{{ form.username.value|default_if_none:'' }}">
+    </div>
+
+<!--    User.BD_CHOICES 참고-->
     <div class="mb-3">
       <label for="building">기숙사 건물</label>
-      <input type="number" class="form-control" name="building" id="building"
+      <input type="text" class="form-control" name="building" id="building"
         value="{{ form.username.value|default_if_none:'' }}">
     </div>
 
     <div class="mb-3">
-      <label for="room">기숙사 방 호수</label>
-      <input type="number" class="form-control" name="room" id="room"
+      <label for="room_num">기숙사 방 호수</label>
+      <input type="number" class="form-control" name="room_num" id="room_num"
         value="{{ form.username.value|default_if_none:'' }}">
     </div>
 

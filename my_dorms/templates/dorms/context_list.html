@@ -24,6 +24,7 @@
 <a href=  "{% url 'dorms:context_create' %}">질문등록하기</a>
 
 {% if user.is_authenticated %}
+    <a href="{% url 'common:show' %}">프로필</a>
     <a href="{% url 'common:logout' %}">로그아웃</a>
 {% else %}
     <p>로그인 되어 있지 않습니다.</p>

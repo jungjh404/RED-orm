@@ -1,10 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-$END$
+
+    <div class="container my-3" style="width:90%; margin: auto;">
+        <form method="post" action="{% url 'common:profile_update' %}">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div class="login_head" style="text-align: center; margin-top: 50px;">
+                <h1 style="font-size: 40px;">환영합니다!</h1>
+                <h2 style="font-weight: 350;">사용자 정보를<br>입력해주세요.</h2>
+            </div>
+
+            <div class="mb-3" style="margin-top:50px">
+                <div>{{user.username}}</div>
+            </div>
+
+            <div class="mb-3" style="margin-top: 20px;">
+                <label for="name" >
+                    이름
+                </label>
+                <input type="text" class="form-control" name="name" id="name"
+                    value="{{ form.nickname.value|default_if_none:'' }}">
+            </div>
+
+            <div class="mb-3" style="margin-top: 20px;">
+                <label for="gender" >
+                    성별
+                </label>
+                <input type="text" class="form-control" name="gender" id="gender"
+                    value="{{ form.nickname.value|default_if_none:'' }}">
+            </div>
+
+            <div class="mb-3" style="margin-top: 20px;">
+                <label for="building">
+                    기숙사 건물
+                </label>
+                <input type="text" class="form-control" name="building" id="building"
+                    value="{{ form.location.value|default_if_none:'' }}">
+            </div>
+
+            <div class="mb-3" style="margin-top: 20px;">
+                <label for="room_num">
+                    방 전호
+                </label>
+                <input type="number" class="form-control" name="room_num" id="room_num"
+                    value="{{ form.location.value|default_if_none:'' }}">
+            </div>
+
+            <div class="button" style="text-align:center; margin-top:40px">
+                <button type="submit" class="btn btn-primary" style="width: 95%; height:50px; border-radius: 1em; font-size: 15px; background-color: black; color: white;">
+                    수정하기
+                </button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>
