@@ -129,3 +129,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/dorms/'
 LOGOUT_REDIRECT_URL = '/common/main'
+AUTH_USER_MODEL = "common.User"
