@@ -29,6 +29,14 @@
         <div>
             {{comment.content}}
             {{comment.writer.username}}
+            <div class="my-3">
+                {% if request.user == comment.writer %}
+                <a href="{% url 'dorms:trade_comment_modify' comment.id %}"
+                   class = "btn btn-sm btn-outline-secondary">수정</a>
+                <a href="#" class = "delete btn btn-sm btn-outline-secondary"
+                    data-uri="{% url 'dorms:trade_comment_delete' comment.id %}">삭제</a>
+                {% endif %}
+            </div>
         </div>
     </li>
     {% endfor %}

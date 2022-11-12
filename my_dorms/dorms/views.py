@@ -184,6 +184,33 @@ def info_context_delete(request, context_id) :
     context.delete()
     return redirect('dorms:info_index')
 
+@login_required(login_url='common:login')
+def info_comment_modify (request, comment_id) :
+    comment = get_object_or_404(Comment_info, pk=comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "수정권한이 없습니다.")
+        return redirect ('dorms:info_detail', context_id = comment.context.id)
+    if request.method == 'POST' :
+        comment_form = CommentInfoForm(request.POST, instance = comment)
+        if comment_form.is_valid() :
+            comment = comment_form.save(commit=False)
+            comment.modify_date = timezone.now()
+            comment.save()
+            return redirect('dorms:info_detail', context_id = comment.context.id)
+    else :
+        comment_form = CommentInfoForm(instance = comment)
+    context = {'comment' : comment, 'form' : comment_form}
+    return render (request, 'dorms/info_comment_form.html', context)
+
+@login_required(login_url='common:login')
+def info_comment_delete(request, comment_id) :
+    comment = get_object_or_404(Comment_info, pk = comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "삭제권한이 없습니다.")
+    else :
+        comment.delete()
+    return redirect('dorms:info_detail', context_id = comment.context.id)
+
 def free_index (request) :
     context_list = Context_free.objects.all()
     context = {
@@ -258,6 +285,33 @@ def free_context_delete(request, context_id) :
 
     context.delete()
     return redirect('dorms:free_index')
+
+@login_required(login_url='common:login')
+def free_comment_modify (request, comment_id) :
+    comment = get_object_or_404(Comment_free, pk=comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "수정권한이 없습니다.")
+        return redirect ('dorms:free_detail', context_id = comment.context.id)
+    if request.method == 'POST' :
+        comment_form = CommentFreeForm(request.POST, instance = comment)
+        if comment_form.is_valid() :
+            comment = comment_form.save(commit=False)
+            comment.modify_date = timezone.now()
+            comment.save()
+            return redirect('dorms:free_detail', context_id = comment.context.id)
+    else :
+        comment_form = CommentFreeForm(instance = comment)
+    context = {'comment' : comment, 'form' : comment_form}
+    return render (request, 'dorms/free_comment_form.html', context)
+
+@login_required(login_url='common:login')
+def free_comment_delete(request, comment_id) :
+    comment = get_object_or_404(Comment_free, pk = comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "삭제권한이 없습니다.")
+    else :
+        comment.delete()
+    return redirect('dorms:free_detail', context_id = comment.context.id)
 
 def trade_index (request) :
     context_list = Context_trade.objects.all()
@@ -334,6 +388,33 @@ def trade_context_delete(request, context_id) :
     context.delete()
     return redirect('dorms:trade_index')
 
+@login_required(login_url='common:login')
+def trade_comment_modify (request, comment_id) :
+    comment = get_object_or_404(Comment_trade, pk=comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "수정권한이 없습니다.")
+        return redirect ('dorms:trade_detail', context_id = comment.context.id)
+    if request.method == 'POST' :
+        comment_form = CommentTradeForm(request.POST, instance = comment)
+        if comment_form.is_valid() :
+            comment = comment_form.save(commit=False)
+            comment.modify_date = timezone.now()
+            comment.save()
+            return redirect('dorms:trade_detail', context_id = comment.context.id)
+    else :
+        comment_form = CommentTradeForm(instance = comment)
+    context = {'comment' : comment, 'form' : comment_form}
+    return render (request, 'dorms/trade_comment_form.html', context)
+
+@login_required(login_url='common:login')
+def trade_comment_delete(request, comment_id) :
+    comment = get_object_or_404(Comment_trade, pk = comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "삭제권한이 없습니다.")
+    else :
+        comment.delete()
+    return redirect('dorms:trade_detail', context_id = comment.context.id)
+
 def copurchase_index (request) :
     context_list = Context_copur.objects.all()
     context = {
@@ -408,3 +489,30 @@ def copurchase_context_delete(request, context_id) :
 
     context.delete()
     return redirect('dorms:copurchase_index')
+
+@login_required(login_url='common:login')
+def copurchase_comment_modify (request, comment_id) :
+    comment = get_object_or_404(Comment_copur, pk=comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "수정권한이 없습니다.")
+        return redirect ('dorms:copurchase_detail', context_id = comment.context.id)
+    if request.method == 'POST' :
+        comment_form = CommentCopurForm(request.POST, instance = comment)
+        if comment_form.is_valid() :
+            comment = comment_form.save(commit=False)
+            comment.modify_date = timezone.now()
+            comment.save()
+            return redirect('dorms:copurchase_detail', context_id = comment.context.id)
+    else :
+        comment_form = CommentCopurForm(instance = comment)
+    context = {'comment' : comment, 'form' : comment_form}
+    return render (request, 'dorms/copur_comment_form.html', context)
+
+@login_required(login_url='common:login')
+def copurchase_comment_delete(request, comment_id) :
+    comment = get_object_or_404(Comment_copur, pk = comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "삭제권한이 없습니다.")
+    else :
+        comment.delete()
+    return redirect('dorms:copurchase_detail', context_id = comment.context.id)
