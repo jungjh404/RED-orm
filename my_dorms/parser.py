@@ -28,6 +28,8 @@ def parse_notice(start_index, end_index) :
             #중복 삭제
             if (i <= num) :
                 continue
+            if (i+page_num > end_index) :
+                continue
             print(str(i+page_num) + "번째 게시물입니다.")
             print(post_url)
             post_url = post_url["href"].replace("amp;","")
@@ -71,7 +73,7 @@ def parse_notice(start_index, end_index) :
     return data
 
 if __name__=='__main__' :
-    result = parse_notice(0,20)
+    result = parse_notice(0,5)
     for data in result :
         notice = Context(title = data["title"], date = data["date"], content = data["content"])
         notice.save()
