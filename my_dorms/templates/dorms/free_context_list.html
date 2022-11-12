@@ -13,7 +13,8 @@
 
 <!--부트스탧 사용-->
 <!--<a href=  "{% url 'dorms:context_create' %}" class = "btn btn-primary">질문등록하기</a>-->
-<a href=  "{% url 'dorms:free_context_create' %}">질문등록하기</a>
+<a href=  "{% url 'dorms:free_context_create' %}">게시글등록하기</a>
+<a href=  "{% url 'dorms:index' %}">메인페이지</a>
 
 {% if user.is_authenticated %}
     <a href="{% url 'common:logout' %}">로그아웃</a>
