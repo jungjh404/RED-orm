@@ -73,7 +73,7 @@ def parse_notice(start_index, end_index) :
     return data
 
 if __name__=='__main__' :
-    result = parse_notice(0,5)
+    result = parse_notice(0,40)
     for data in result :
         notice = Context(title = data["title"], date = data["date"], content = data["content"])
         notice.save()

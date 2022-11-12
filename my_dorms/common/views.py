@@ -3,10 +3,14 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from .forms import UserForm, CustomUserChangeForm
 from .models import User
+from dorms.models import Context
 
 # Create your views here.
 def main (request) :
-    context = {}
+    context_list = Context.objects.all()[:5]
+    context = {
+        'context_list' : context_list
+    }
     return render (request, 'common/main.html', context)
 
 def signup(request):
