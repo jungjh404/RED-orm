@@ -13,7 +13,7 @@ class Washing_Machine(models.Model):
         return f'{self.building} {self.floor} {self.room}'
 
 
-class Usage_Staus(models.Model):
+class Usage_Status(models.Model):
     machine_id = models.ForeignKey(Washing_Machine, on_delete=models.PROTECT)
     user_id = models.ForeignKey(User, on_delete=models.PROTECT)
     start_time = models.DateTimeField()
@@ -24,7 +24,7 @@ class Usage_Staus(models.Model):
         return f'{self.machine_id} {self.user_id}'
 
 
-class Reservaton(models.Model):
+class Reservation(models.Model):
     machine_id = models.ForeignKey(Washing_Machine, on_delete=models.PROTECT)
     user_id = models.ForeignKey(User, on_delete=models.PROTECT)
     reservation_time = models.DateTimeField()

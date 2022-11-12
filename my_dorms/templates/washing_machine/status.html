@@ -1,0 +1,9 @@
+{% if machine_lst %}
+    <ul>
+        {% for machine in machine_lst %}
+            <li>
+                {{machine.building}} {{machine.floor}} {{machine.room}}  {{machine.machine_id}}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

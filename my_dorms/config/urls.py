@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dorms/', include('dorms.urls')),
     path('common/', include('common.urls')),
+    path('washing_machine/', include('washing_machine.urls'))
 ]
