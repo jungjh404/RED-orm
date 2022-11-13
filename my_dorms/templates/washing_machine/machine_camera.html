@@ -1,0 +1,18 @@
+{% extends "dorms/base.html" %}
+{% block content %}
+<script type="text/javascript" src="./js/jsQR.js"></script>
+<div class="wm-container-description">
+  <span class="wm-description" id="wm-description-qr">QR코드를<br>틀 안에 맞춰주세요.</span>
+</div>
+<div id="wm-loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
+<canvas id="wm-canvas" hidden></canvas>
+<div id="wm-output" hidden>
+  <div id="wm-outputMessage">No QR code detected.</div>
+  <div hidden><b>Data:</b> <span id="wm-outputData"></span></div>
+</div>
+<canvas id="wm-editCanvas" hidden></canvas>
+{% endblock %}
+
+{% block script %}
+<script src="./js/CamScript.js"></script>
+{% endblock %}
