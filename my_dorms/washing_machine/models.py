@@ -4,17 +4,17 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 # Create your models here.
 class Washing_Machine(models.Model):
-    machine_id = models.IntegerField()
-    building = models.CharField(max_length=1)
+    building = models.CharField(max_length=100)
     floor = models.IntegerField()
     room = models.IntegerField()
+    machine_num = models.IntegerField()
 
     def __str__(self):
-        return f'{self.building} {self.floor} {self.room}'
+        return f'{self.building} {self.floor} {self.room} {self.machine_num}'
 
 
 class Usage_Status(models.Model):
-    machine_id = models.ForeignKey(Washing_Machine, on_delete=models.PROTECT)
+    machine_id = models.ForeignKey(Washing_Machine, on_delete=models.PROTECT, related_name="usage")
     user_id = models.ForeignKey(User, on_delete=models.PROTECT)
     start_time = models.DateTimeField()
     modified_time = models.DateTimeField()
