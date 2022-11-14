@@ -1,34 +1,66 @@
+{% extends './base.html' %}
+{% block content %}
+<nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'dorms:copurchase_index' %}">뒤로가기</a>
+        <a class="navbar-brand" href="">공동구매게시판</a>
+        <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'common:logout' %}">로그아웃</a></li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'common:login' %}">로그인</a></li>
+                    {% endif %}
+            </ul>
+    </div>
+</nav>
 <!--CSS 부분-->
 {% load static %}
 <link rel="stylesheet" type = "text/css" href = "{% static 'style.css' %}">
 
-<h1>{{content.title}}</h1>
-<div>
-    {{content.content}}
-</div>
-<div>
-    {{content.writer.username}}
-</div>
-<div>
-    {{content.date}}
-</div>
-
-<div class="my-3">
-    {% if request.user == content.writer %}
-        <a href="{% url 'dorms:copurchase_context_modify' content.id  %}"  class="btn btn-sm btn-outline-secondary">수정</a>
-        <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+<div class="container my-3">
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2">제목: {{ content.title }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ content.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2">
+                    {{content.writer.username}}
+                </div>
+                <div class="badge bg-light text-dark p-2">
+                    {{ content.date }}
+                </div>
+            </div>
+            <div class="me-1">
+            {% if request.user == content.writer %}
+                <a href="{% url 'dorms:copurchase_context_modify' content.id  %}"  class="btn btn-sm btn-outline-secondary">수정</a>
+                <a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
            data-uri="{% url 'dorms:copurchase_context_delete' content.id %}">삭제</a>
-    {% endif %}
-</div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
 
-<h5> {{comment_list.count}}개의 답변이 있습니다.</h5>
-{% if comment_list %}
-<ul>
+    <!-- 답변 -->
+    <h6 class="border-bottom my-3 py-2">{{comment_list.count}}개의 댓글이 있습니다.</h6>
     {% for comment in comment_list %}
-    <li>
-        <div>
-            {{comment.content}}
-            {{comment.writer.username}}
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="d-inline-flex justify-content-start">
+                <div class="badge bg-light text-dark p-2">
+                    {{comment.writer.username}}
+                </div>
+            </div>
+            <div class="d-inline-flex justify-content-start">
+                <div class="card-text" style="white-space: pre-line;">{{ comment.content }}</div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2">
+                    {{ comment.create_date }}
+                </div>
+            </div>
             <div class="my-3">
                 {% if request.user == comment.writer %}
                 <a href="{% url 'dorms:copurchase_comment_modify' comment.id %}"
@@ -37,33 +69,38 @@
                     data-uri="{% url 'dorms:copurchase_comment_delete' comment.id %}">삭제</a>
                 {% endif %}
             </div>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-    <p>답변이 없습니다.</p>
-{% endif %}
 
-<form method="post" action = "{% url 'dorms:copurchase_comment_create' content.id %}">
-    {% csrf_token %}
-    {% if form.errors %}
-    <div class="alert alert-danger" role="alert">
-        {% for field in form %}
-        {% if field.errors %}
-        <div>
-            <strong>{{field.label}}</strong>
-            <span style="color: red;"> {{field.errors}} </span>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- 답변 등록 -->
+    <form action="{% url 'dorms:copurchase_comment_create' content.id %}" method="post" class="my-3">
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{field.label}}</strong>
+                <span style="color: red;"> {{field.errors}} </span>
         </div>
         {% endif %}
         {% endfor %}
     </div>
     {% endif %}
-    <div class="form-group">
-        <textarea {% if not user.is_authenticated %} disabled {% endif %} name = "content" id="content" rows="15"></textarea>
-    </div>
-    <input type="submit" value="답변등록" class="btn btn-primary">
-</form>
+
+         <div class="row">
+            <div class="col-9">
+            <textarea {% if not user.is_authenticated %} disabled {% endif %} name = "content" id="content" class="form-control" rows="1"></textarea>
+            </div>
+            <div class="col-3">
+                <input style="margin-top:0; background-color: #1c6758;"
+                       class="btn btn-success" type="submit" value="등록">
+            </div>
+        </div>
+    </form>
+</div>
 
 {% block script %}
 <script type="text/javascript">
@@ -76,4 +113,6 @@
         });
     });
 </script>
+
+{% endblock %}
 {% endblock %}
