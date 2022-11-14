@@ -1,31 +1,94 @@
-{% if context_list %}
-    <ul>
-    {% for context in context_list %}
-        <li>
-            <a href="{% url 'dorms:detail' context.id %}">{{ context.title }}</a>
-            <p>{{ context.writer.username }}</p>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>글이 없습니다.</p>
-{% endif %}
+{% extends './base.html' %}
+{% block content %}
 
-<div>
-    <a href=  "{% url 'dorms:info_index' %}">정보 게시판</a>
-    <a href=  "{% url 'dorms:free_index' %}">자유 게시판</a>
-    <a href=  "{% url 'dorms:trade_index' %}">물품거래 게시판</a>
-    <a href=  "{% url 'dorms:copurchase_index' %}">공동구매 게시판</a>
+<!-- 네비게이션바 -->
+<nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'dorms:index' %}">공지사항</a>
+        <ul class="navbar-nav">
+                  <!--  {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'common:logout' %}">로그아웃</a></li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'common:login' %}">로그인</a></li>
+                    {% endif %} -->
+            </ul>
+    </div>
+</nav>
 
+<div class="container my-3">
+        <table class="table">
+            <thead>
+            <tr class="table-success" >
+                <th style="text-align: center; color: white; background-color: #1c6758;" >번호</th>
+                <th style="text-align: center; color: white;background-color: #1c6758;" >제목</th>
+                <th style="text-align: center; color: white;background-color: #1c6758;" >작성자</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if context_list %}
+            {% for context in context_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="{% url 'dorms:detail' context.id %}">{{ context.title }}</a>
+                </td>
+                <td>{{ context.writer.username }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="3">글이 없습니다.</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <div align="right">
+                <a style="background-color: #1c6758;" href= "{% url 'dorms:context_create' %}" class = "fs-10 btn btn-success">게시글 등록</a>
+        </div>
 </div>
 
-<!--부트스탧 사용-->
-<!--<a href=  "{% url 'dorms:context_create' %}" class = "btn btn-primary">질문등록하기</a>-->
-<a href=  "{% url 'dorms:context_create' %}">게시글 등록하기</a>
+<ul class="navbar navbar-light bg-light border-top border-bottom">
+    <div class="container-fluid">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item mx-auto">
+                <a class="nav-link" href="{% url 'dorms:info_index' %}">정보게시판 </a></li>
+            <li class="nav-item mx-auto">
+                <a class="nav-link" href="{% url 'dorms:free_index' %}">자유게시판</a></li>
+            <li class="nav-item mx-auto">
+                <a class="nav-link" href="{% url 'dorms:trade_index' %}">거래게시판</a></li>
+            <li class="nav-item mx-auto">
+                <a class="nav-link" href="{% url 'dorms:copurchase_index' %}">공동구매게시판</a></li>
+        </ul>
+    </div>
+</ul>
 
-{% if user.is_authenticated %}
-    <a href="{% url 'common:show' %}">프로필</a>
-    <a href="{% url 'common:logout' %}">로그아웃</a>
-{% else %}
-    <p>로그인 되어 있지 않습니다.</p>
-{% endif %}
+
+<!--<nav class="navbar navbar-expand-sm navbar-light bg-light border-top border-bottom">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent2"
+                aria-controls="navbarSupportedContent2"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+            <ul class="navbar-nav mx-auto">
+                    <li class="nav-item mx-auto">
+                        <a class="nav-link" href="{% url 'dorms:info_index' %}">정보게시판 </a></li>
+                    <li class="nav-item mx-auto">
+                        <a class="nav-link" href="{% url 'dorms:free_index' %}">자유게시판</a></li>
+                    <li class="nav-item mx-auto">
+                        <a class="nav-link" href="{% url 'dorms:trade_index' %}">거래게시판</a></li>
+                    <li class="nav-item mx-auto">
+                        <a class="nav-link" href="{% url 'dorms:copurchase_index' %}">공동구매게시판</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>-->
+
+{% endblock %}
