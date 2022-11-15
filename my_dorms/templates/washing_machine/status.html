@@ -1,9 +1,43 @@
-{% if status_lst %}
-    <ul>
-        {% for status in status_lst %}
-            <li>
-                {{status.machine_id}} {{status.start_time}} {{status.end_time}}
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
+{% extends "dorms/base.html" %}
+{% block content %}
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+<div class="wm-container-dorminfo">
+  <span id="wm-dorminfo">지관 5층</span>
+</div>
+
+<div class="wm-container-washingmachine">
+  <div class="wm-container-washingmachine-element">
+    <button type="button" class="wm-button-washingmachine">
+      <span class="wm-name-washingmachine">지관 5-1</span>
+      <div class="wm-circular-progress-time"></div>
+      <img src="{%static './assets/washingmachine.png' %}" alt="washingmachine">
+      <span class="wm-time-washingmachine">0분</span>
+    </button>
+    <button type="button" class="wm-button-washingmachine-reservation"><img src="{%static './assets/button_reservation.png' %}" alt="button_reservation"></button>
+  </div>
+  <div class="wm-container-washingmachine-element">
+    <button type="button" class="wm-button-washingmachine">
+      <span class="wm-name-washingmachine">지관 5-2</span>
+      <div class="wm-circular-progress-time"></div>
+      <img src="{%static './assets/washingmachine.png' %}" alt="washingmachine">
+      <span class="wm-time-washingmachine">0분</span>
+    </button>
+    <button type="button" class="wm-button-washingmachine-reservation" onclick="ReservationButtonClicked()"><img src="{%static './assets/button_reservation.png' %}" alt="button_reservation"></button>
+  </div>
+</div>
+
+<div class="wm-container-button-use">
+  <button type="button" id="wm-button-use" onclick="UseButtonClicked()"><img src="{%static './assets/button_use.png' %}" alt="button_use"></button>
+</div>
+
+<script>
+  var wm_machineImage_url = "{%static './assets/washingmachine.png' %}";
+  var wm_buttonReservationImage_url = "{%static './assets/button_reservation.png' %}";
+  var wm_buttonUseImage_url = "{%static './assets/button_use.png' %}";
+  var wm_cameraPage_url = "{% url 'washing_machine:camera' %}";
+</script>
+
+<script src="{%static './js/washingMachineState.js' %}"></script>
+{% endblock %}

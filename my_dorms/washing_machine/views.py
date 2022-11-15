@@ -29,3 +29,7 @@ def status(request):
 def add(request):
     if(request.method == 'POST'):
         pass
+
+@login_required(login_url='common:login')
+def camera(request):
+    return render(request, 'washing_machine/camera.html')
