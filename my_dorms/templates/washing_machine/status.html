@@ -3,11 +3,15 @@
 {% load static %}
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-<div class="wm-container-dorminfo">
-  <span id="wm-dorminfo">신관A</span>
+<div class="wm-container-appbar">
+  <input type="button" value="BACK" onClick="history.go(-1)">
+  세탁기 정보 확인
 </div>
 
 {% if status_lst %}
+  <div class="wm-container-dorminfo">
+    <span id="wm-dorminfo">{{ building }}</span>
+  </div>
   <div class="wm-container-washingmachine" id="wm-container-machine">
     {% for status in status_lst %}
       <div class="wm-container-washingmachine-element">

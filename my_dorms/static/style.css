@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
 textarea {
     width:100%;
 }
@@ -8,17 +10,18 @@ input[type=submit] {
 
 /********홍구님 시작********/
 .wm-container-appbar{
-  position: fixed;
-  width: 100vw;
+  font-family: 'Noto Sans KR', sans-serif;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
   text-align: center;
   background-color: #1C6758;
   padding: 10px 0 10px 0;
   color: white;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
-  top: 0%;
-  left: 50%;
-  transform: translate( -50%, 0% );
 }
 
 .wm-container-dorminfo{
@@ -28,16 +31,17 @@ input[type=submit] {
   border: solid;
   border-width: 3px;
   border-color: black;
-  border-radius: 20px;
+  border-radius: 10px;
   top: 15%;
   left: 50%;
   transform: translate( -50%, 0% );
 }
 
 #wm-dorminfo{
-  font-size: 2em;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.5em;
   font-weight: bold;
-  padding: 20px 30px;
+  padding: 20px 20px;
 }
 
 .wm-container-washingmachine{
@@ -75,6 +79,7 @@ input[type=submit] {
 }
 
 .wm-name-washingmachine{
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: bold;
   font-size: 1em;
   text-align: left;
@@ -109,10 +114,25 @@ input[type=submit] {
   transform: translate( -50%, -50% );
 }
 
+.wm-circular-progress-time.ok::before{
+  content: "";
+  position: absolute;
+  background-color: #c1edbe;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: solid;
+  border-width: 1px;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+}
+
 .wm-time-washingmachine{
+  font-family: 'Noto Sans KR', sans-serif;
   color: #1C6758;
   font-weight: bold;
-  font-size: 1.3em;
+  font-size: 1.2em;
   text-align: center;
   position: absolute;
   top: 50%;
@@ -142,17 +162,20 @@ input[type=submit] {
 }
 
 #wm-description-qr{
+  font-family: 'Noto Sans KR', sans-serif;
   color: white;
   font-weight: bold;
   font-size: 2em;
 }
 
 #wm-outputMessage{
+  font-family: 'Noto Sans KR', sans-serif;
   color: white;
   font-weight: 1em;
 }
 
 #wm-outputData{
+  font-family: 'Noto Sans KR', sans-serif;
   color: white;
   font-weight: 1em;
 }

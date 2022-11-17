@@ -45,6 +45,7 @@ window.onload = function() {
             canvas.drawImage(video, video.videoWidth * 0.25, video.videoHeight * 0.1, video.videoWidth * 0.5, video.videoWidth * 0.5, canvasElement.width * 0.25, canvasElement.height * 0.1, canvasElement.width * 0.5, canvasElement.width * 0.5);
             canvas.lineWidth = 5;
             canvas.strokeRect(canvasElement.width * 0.25, canvasElement.height * 0.1, canvasElement.width * 0.5, canvasElement.width * 0.5);
+            canvas.strokeStyle = '#1C6758';
             canvas.strokeRect(canvasElement.width * 0.3, canvasElement.height * 0.1 + canvasElement.width * 0.05, canvasElement.width * 0.4, canvasElement.width * 0.4);
  
             var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
