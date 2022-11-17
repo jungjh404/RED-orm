@@ -15,7 +15,7 @@ $(document).ready(function() {
     for (var i = 1; i <= machineNum; i++){
         var endTime = $('.wm-container-washingmachine-element:nth-child(' + i + ') .wm-time-washingmachine').text();
         console.log("endTime: " + endTime);
-        var diffTime = Math.abs(endTime - date_utc);
+        var diffTime = endTime - date_utc;
         console.log("diffTime: " + diffTime);
     }
 });

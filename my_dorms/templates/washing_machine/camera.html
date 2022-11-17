@@ -13,8 +13,13 @@
   <div id="wm-outputMessage">No QR code detected.</div>
   <div hidden><b>Data:</b> <span id="wm-outputData"></span></div>
 </div>
-<input type="hidden" name="ocr-image" id="wm-ocr-image" value="{{ form.ocr_image.value|default_if_none:'' }}">
-<input type="hidden" name="ocr-position" id="wm-ocr-position" value="{{ form.ocr_position.value|default_if_none:'' }}"> 
+
+<form method="post" action="{% url 'washing_machine:add' %}" id="wm-camera-info">
+  {% csrf_token%}
+  <input type="hidden" name="ocr-image" id="wm-ocr-image" value="">
+  <input type="hidden" name="ocr-position" id="wm-ocr-position" value="">
+  <input type="hidden" name="ocr-position" id="wm-code-data" value=""> 
+</form>
 
 <script src="{%static './js/CamScript.js' %}"></script>
 {% endblock %}
