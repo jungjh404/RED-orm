@@ -1,4 +1,5 @@
 window.onload = function() {
+    var isSent = false;
     $('body').css('background-color', 'black');
     var video = document.createElement("video");
     var canvasElement = document.getElementById("wm-canvas");
@@ -44,8 +45,8 @@ window.onload = function() {
             canvas.drawImage(video, video.videoWidth * 0.25, video.videoHeight * 0.1, video.videoWidth * 0.5, video.videoWidth * 0.5, canvasElement.width * 0.25, canvasElement.height * 0.1, canvasElement.width * 0.5, canvasElement.width * 0.5);
             canvas.lineWidth = 5;
             canvas.strokeRect(canvasElement.width * 0.25, canvasElement.height * 0.1, canvasElement.width * 0.5, canvasElement.width * 0.5);
-            canvas.strokeRect(canvasElement.width * 0.3, canvasElement.height * 0.17, canvasElement.width * 0.4, canvasElement.width * 0.4);
-
+            canvas.strokeRect(canvasElement.width * 0.3, canvasElement.height * 0.1 + canvasElement.width * 0.05, canvasElement.width * 0.4, canvasElement.width * 0.4);
+ 
             var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
             var code = jsQR(imageData.data, imageData.width, imageData.height, {
             inversionAttempts: "dontInvert",
@@ -53,7 +54,9 @@ window.onload = function() {
             if (code
                 && code.location.topLeftCorner.x > (canvasElement.width * 0.25) && code.location.topLeftCorner.y > (canvasElement.height * 0.1)
                 && code.location.bottomRightCorner.x < (canvasElement.width * 0.75) && code.location.bottomRightCorner.y < (canvasElement.height * 0.1 + canvasElement.width * 0.5)
-                ) {
+                && code.location.topLeftCorner.x < (canvasElement.width * 0.3) && code.location.topLeftCorner.y < (canvasElement.height * 0.1 + canvasElement.width * 0.05)
+                && code.location.bottomRightCorner.x > (canvasElement.width * 0.7) && code.location.bottomRightCorner.y > (canvasElement.height * 0.1 + canvasElement.width * 0.05 + canvasElement.width * 0.4)
+                && !isSent) {
                 drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
                 drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
                 drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
@@ -68,6 +71,7 @@ window.onload = function() {
                 var codeData = code.data;
                 document.getElementById("wm-code-data").value = codeData;
                 document.getElementById("wm-camera-info").submit();
+                isSent = true;
 
                 outputMessage.hidden = true;
                 outputData.parentElement.hidden = false;
