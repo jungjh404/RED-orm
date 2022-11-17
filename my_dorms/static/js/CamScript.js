@@ -58,10 +58,11 @@ window.onload = function() {
                 drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
 
                 canvas.clearRect(0, 0, canvasElement.width, canvasElement.height);
-                canvasElement.height = video.videoHeight * (document.body.clientWidth / video.videoWidth) * 0.4;
-                canvas.drawImage(video, 0, video.videoHeight * 0.6, video.videoWidth, video.videoHeight * 0.4, 0, 0, canvasElement.width, canvasElement.height);
+                canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
                 var editImage = canvasElement.toDataURL("image/jpeg");
                 document.getElementById("wm-ocr-image").value = editImage;
+                console.log(editImage);
+                //location.href = wm_statusPage_url;
 
                 outputMessage.hidden = true;
                 outputData.parentElement.hidden = false;
