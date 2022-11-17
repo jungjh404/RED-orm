@@ -29,7 +29,11 @@ def status(request):
 @login_required(login_url='common:login')
 def add(request):
     if(request.method == 'POST'):
-        pass
+        img = request.POST["ocr-image"]
+        pos = request.POST["ocr-position"]
+        code = request.POST["code-data"]
+        
+        return redirect('washing_machine:status')
 
 @login_required(login_url='common:login')
 def camera(request):
