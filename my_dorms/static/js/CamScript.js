@@ -63,7 +63,7 @@ window.onload = function() {
                 canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
                 var editImage = canvasElement.toDataURL("image/jpeg");
                 document.getElementById("wm-ocr-image").value = editImage;
-                var ocrPosition = [(0, code.location.bottomRightCorner.y), (canvasElement.width, canvasElement.height)];
+                var ocrPosition = [0, code.location.bottomRightCorner.y, canvasElement.width, canvasElement.height];
                 document.getElementById("wm-ocr-position").value = ocrPosition;
                 var codeData = code.data;
                 document.getElementById("wm-code-data").value = codeData;
