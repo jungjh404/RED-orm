@@ -1,4 +1,3 @@
-import pytz
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Washing_Machine, Usage_Status, Reservation
 from django.contrib.auth.decorators import login_required
