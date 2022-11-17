@@ -44,6 +44,7 @@ window.onload = function() {
             canvas.drawImage(video, video.videoWidth * 0.25, video.videoHeight * 0.1, video.videoWidth * 0.5, video.videoWidth * 0.5, canvasElement.width * 0.25, canvasElement.height * 0.1, canvasElement.width * 0.5, canvasElement.width * 0.5);
             canvas.lineWidth = 5;
             canvas.strokeRect(canvasElement.width * 0.25, canvasElement.height * 0.1, canvasElement.width * 0.5, canvasElement.width * 0.5);
+            canvas.strokeRect(canvasElement.width * 0.3, canvasElement.height * 0.15, canvasElement.width * 0.4, canvasElement.width * 0.4);
 
             var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
             var code = jsQR(imageData.data, imageData.width, imageData.height, {
@@ -62,7 +63,9 @@ window.onload = function() {
                 canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
                 var editImage = canvasElement.toDataURL("image/jpeg");
                 document.getElementById("wm-ocr-image").value = editImage;
-                location.href = wm_statusPage_url;
+                var ocrPosition = [(0, code.location.bottomRightCorner.y), (canvasElement.width, canvasElement.height)];
+                document.getElementById("wm-ocr-position").value = ocrPosition;
+                //location.href = wm_statusPage_url;
 
                 outputMessage.hidden = true;
                 outputData.parentElement.hidden = false;
