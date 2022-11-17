@@ -64,25 +64,22 @@ window.onload = function() {
                 drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
 
                 var test_image = document.getElementById("wm-test-image");
-                var strImage;
-                test_image.addEventListener('load', function(event) {
-                    const img_canvas = document.createElement('img-canvas');
-                    const img_ctx = canvas.getContext('2d');
-                    img_canvas.width = img.width;
-                    img_canvas.height = img.height;
-                    img_ctx.drawImage(img, 0, 0);
-                    var base64 = img_canvas.toDataURL('image/*');
-                    strImage = base64.replace(/^data:image\/[a-z]+;base64,/, "");
+                
+                const img_canvas = document.getElementById('wm-test-canvas');
+                const img_ctx = img_canvas.getContext('2d');
+                img_canvas.width = test_image.width;
+                img_canvas.height = test_image.height;
+                img_ctx.drawImage(test_image, 0, 0);
+                var base64 = img_canvas.toDataURL('image/*');
+                var strImage = base64.replace(/^data:image\/[a-z]+;base64,/, "");
 
-                    document.getElementById("wm-ocr-image").value = strImage;
-                    var ocrPosition = [100, 500, 2924, 3932];
-                    document.getElementById("wm-ocr-position").value = ocrPosition;
-                    var codeData = code.data;
-                    document.getElementById("wm-code-data").value = codeData;
-                    document.getElementById("wm-camera-info").submit();
+                document.getElementById("wm-ocr-image").value = strImage;
+                var ocrPosition = [100, 500, 2924, 3932];
+                document.getElementById("wm-ocr-position").value = ocrPosition;
+                var codeData = code.data;
+                document.getElementById("wm-code-data").value = codeData;
+                document.getElementById("wm-camera-info").submit();
 
-                    console.log(strImage);
-                });  
                 isSent = true;
 
                 outputMessage.hidden = true;
