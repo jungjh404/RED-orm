@@ -1,4 +1,5 @@
 window.onload = function() {
+    $('body').css('background-color', 'black');
     var video = document.createElement("video");
     var canvasElement = document.getElementById("wm-canvas");
     var canvas = canvasElement.getContext("2d");
@@ -61,8 +62,7 @@ window.onload = function() {
                 canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
                 var editImage = canvasElement.toDataURL("image/jpeg");
                 document.getElementById("wm-ocr-image").value = editImage;
-                console.log(editImage);
-                //location.href = wm_statusPage_url;
+                location.href = wm_statusPage_url;
 
                 outputMessage.hidden = true;
                 outputData.parentElement.hidden = false;

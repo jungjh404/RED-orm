@@ -1,7 +1,9 @@
 {% extends "dorms/base.html" %}
 {% block content %}
 {% load static %}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{%static './js/jsQR.js' %}"></script>
+
 <div class="wm-container-description">
   <span class="wm-description" id="wm-description-qr">QR코드를<br>틀 안에 맞춰주세요.</span>
 </div>
@@ -12,6 +14,10 @@
   <div hidden><b>Data:</b> <span id="wm-outputData"></span></div>
 </div>
 <input type="hidden" name="ocr-image" id="wm-ocr-image" value="{{ form.ocr_image.value|default_if_none:'' }}">
+
+<script>
+  var wm_statusPage_url = "{% url 'washing_machine' %}";
+</script>
 
 <script src="{%static './js/CamScript.js' %}"></script>
 {% endblock %}

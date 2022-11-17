@@ -7,17 +7,23 @@
   <span id="wm-dorminfo">지관 5층</span>
 </div>
 
-<div class="wm-container-washingmachine">
-  <div class="wm-container-washingmachine-element">
-    <button type="button" class="wm-button-washingmachine">
-      <span class="wm-name-washingmachine">지관 5-1</span>
-      <div class="wm-circular-progress-time"></div>
-      <img src="{%static './assets/washingmachine.png' %}" alt="washingmachine">
-      <span class="wm-time-washingmachine">0분</span>
-    </button>
-    <button type="button" class="wm-button-washingmachine-reservation"><img src="{%static './assets/button_reservation.png' %}" alt="button_reservation"></button>
-  </div>
-  <div class="wm-container-washingmachine-element">
+{% if status_lst %}
+    <div class="wm-container-washingmachine" id="wm-container-machine">
+        {% for status in status_lst %}
+            <div class="wm-container-washingmachine-element">
+              <button type="button" class="wm-button-washingmachine">
+                <span class="wm-name-washingmachine">{{status.machine_id}}</span>
+                <div class="wm-circular-progress-time"></div>
+                <img src="{%static './assets/washingmachine.png' %}" alt="washingmachine">
+                <span class="wm-time-washingmachine">{{status.end_time}}</span>
+              </button>
+              <button type="button" class="wm-button-washingmachine-reservation"><img src="{%static './assets/button_reservation.png' %}" alt="button_reservation"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+  <!-- <div class="wm-container-washingmachine-element">
     <button type="button" class="wm-button-washingmachine">
       <span class="wm-name-washingmachine">지관 5-2</span>
       <div class="wm-circular-progress-time"></div>
@@ -25,8 +31,7 @@
       <span class="wm-time-washingmachine">0분</span>
     </button>
     <button type="button" class="wm-button-washingmachine-reservation" onclick="ReservationButtonClicked()"><img src="{%static './assets/button_reservation.png' %}" alt="button_reservation"></button>
-  </div>
-</div>
+  </div> -->
 
 <div class="wm-container-button-use">
   <button type="button" id="wm-button-use" onclick="UseButtonClicked()"><img src="{%static './assets/button_use.png' %}" alt="button_use"></button>
