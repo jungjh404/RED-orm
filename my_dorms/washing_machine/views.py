@@ -1,3 +1,4 @@
+import pytz
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Washing_Machine, Usage_Status, Reservation
 from django.contrib.auth.decorators import login_required
@@ -15,8 +16,8 @@ def status(request):
             }
             recent_use = machine.usage.order_by('-end_time').first()
             if recent_use is not None:
-                status_dict['start_time'] = recent_use.start_time
-                status_dict['end_time'] = recent_use.end_time
+                status_dict['start_time'] = recent_use.start_time.timestamp()
+                status_dict['end_time'] = recent_use.end_time.timestamp()
             status_lst.append(status_dict)
     
     status_form = {
