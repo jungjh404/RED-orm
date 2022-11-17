@@ -1,35 +1,36 @@
 {% load static %}
 
-  <div class="header">
-      <h3>마이페이지</h3>
-  </div>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <!-- 네비게이션바 -->
 
-  <div class="mainContent">
-      <div class="pageTitle">
-          <p>내 정보</p>
+  <div class="login_box" style="height: fit-content;">
+      <div class="logo_text" style="margin-bottom: 30px;">
+        마이페이지
       </div>
-      <table class="userInfo">
+      <table style="margin: auto; margin-bottom: 30px; text-align: center;">
           <tr>
-              <td>이름</td>
+              <td class="register_field" style="margin: 0px;"><b>이름</b></td>
               {% comment %} <td>김명륜</td> {% endcomment %}
               <td>{{ user.name }}</td>
           </tr>
           <tr>
-            <td>성별</td>
+            <td class="register_field" style="margin: 0px;"><b>성별</b></td>
             {% comment %} <td>5학기</td> {% endcomment %}
             <td>{{ user.gender }}</td>
           </tr>
           <tr>
-            <td>기숙사 건물</td>
+            <td class="register_field" style="margin: 0px;"><b>기숙사 건물</b></td>
             {% comment %} <td>신관A</td> {% endcomment %}
             <td>{{ user.building }}</td>
           </tr>
           <tr>
-            <td>방 호수</td>
+            <td class="register_field" style="margin: 0px;"><b>방 호수</b></td>
             {% comment %} <td>102</td> {% endcomment %}
               <td>{{ user.room_num }}</td>
           </tr>
       </table>
-      <a href="{% url 'common:profile_update' %}">프로필 수정</a>
+      <a href="{% url 'common:profile_update' %}" class="profile_update_link">프로필 수정</a>
+      <a href="{% url 'common:logout' %}" class="logout_link">로그아웃</a>
   </div>
