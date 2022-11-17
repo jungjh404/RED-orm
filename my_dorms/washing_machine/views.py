@@ -20,6 +20,7 @@ def status(request):
             status_lst.append(status_dict)
     
     status_form = {
+        "building": request.user.building,
         "status_lst": status_lst
     }
 
