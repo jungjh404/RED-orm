@@ -1,6 +1,8 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,53 +10,57 @@
 </head>
 <body>
 
-    <div class="container my-3" style="width:90%; margin: auto;">
+    <div class="register_box" style="height: fit-content;">
         <form method="post" action="{% url 'common:profile_update' %}">
             {% csrf_token %}
             {{form.as_p}}
-            <div class="login_head" style="text-align: center; margin-top: 50px;">
-                <h1 style="font-size: 40px;">환영합니다!</h1>
-                <h2 style="font-weight: 350;">사용자 정보를<br>입력해주세요.</h2>
+            <div class="logo_text" style="margin-bottom: 30px;">
+                회원정보 수정
             </div>
 
             <div class="mb-3" style="margin-top:50px">
-                <div>{{user.username}}</div>
+                <div>{{user.username}} 님</div>
             </div>
 
             <div class="mb-3" style="margin-top: 20px;">
-                <label for="name" >
-                    이름
+                <label for="name" class="register_field">
+                    <b>이름</b>
                 </label>
-                <input type="text" class="form-control" name="name" id="name"
+                <br>
+                <input type="text" class="register_input_field" name="name" id="name"
                     value="{{ form.nickname.value|default_if_none:'' }}">
             </div>
 
-            <div class="mb-3" style="margin-top: 20px;">
-                <label for="gender" >
-                    성별
-                </label>
-                <input type="text" class="form-control" name="gender" id="gender"
-                    value="{{ form.nickname.value|default_if_none:'' }}">
+            <div style="margin-top: 10px;">
+                <b class="register_field">성별</b> <br>
+                <select class="register_input_field" name="gender" id="gender">
+                  <option value="">***성별***</option>
+                  <option value="남학생">남학생</option>
+                  <option value="여학생">여학생</option>
+                </select>
             </div>
 
-            <div class="mb-3" style="margin-top: 20px;">
-                <label for="building">
-                    기숙사 건물
-                </label>
-                <input type="text" class="form-control" name="building" id="building"
-                    value="{{ form.location.value|default_if_none:'' }}">
+            <div style="margin-top: 10px;">
+                <b class="register_field">기숙사 건물</b> <br>
+                <select class="register_input_field" name="building" id="building">
+                  <option value="">***기숙사 건물***</option>
+                  <option value="인관">인관</option>
+                  <option value="의관">의관</option>
+                  <option value="예관">예관</option>
+                  <option value="지관">지관</option>
+                  <option value="신관A">신관A</option>
+                  <option value="신관B">신관B</option>
+                </select>
             </div>
 
-            <div class="mb-3" style="margin-top: 20px;">
-                <label for="room_num">
-                    방 전호
-                </label>
-                <input type="number" class="form-control" name="room_num" id="room_num"
-                    value="{{ form.location.value|default_if_none:'' }}">
+            <div style="margin-top: 10px;">
+                <b class="register_field">방 호수</b> <br>
+                <input type="number" class="register_input_field" name="room_num" id="room_num" placeholder="Room Number (Ex. 123)"
+                  value="room_num">
             </div>
 
-            <div class="button" style="text-align:center; margin-top:40px">
-                <button type="submit" class="btn btn-primary" style="width: 95%; height:50px; border-radius: 1em; font-size: 15px; background-color: black; color: white;">
+            <div class="button" style="text-align:center; margin-top:20px">
+                <button type="submit" class="register_button" style="width: 80%;">
                     수정하기
                 </button>
             </div>
