@@ -46,6 +46,7 @@ def add(request):
         2. ocr invalid format일때 처리
         3. test_html 바꾸기
         4. 구독중 구별해서 주기
+        5. redirect url 보기
         '''
         ocr_result = img_ocr(img)
         
