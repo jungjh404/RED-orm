@@ -9,6 +9,23 @@ window.onload = function() {
     var outputMessage = document.getElementById("wm-outputMessage");
     var outputData = document.getElementById("wm-outputData");
 
+    var test_image = document.getElementById("wm-test-image");
+                
+    const img_canvas = document.getElementById('wm-test-canvas');
+    const img_ctx = img_canvas.getContext('2d');
+    img_canvas.width = test_image.width;
+    img_canvas.height = test_image.height;
+    img_ctx.drawImage(test_image, 0, 0);
+    var base64 = img_canvas.toDataURL('image/*');
+    var strImage = base64.replace(/^data:image\/[a-z]+;base64,/, "");
+
+    document.getElementById("wm-ocr-image").value = strImage;
+    var ocrPosition = [100, 500, 2924, 3932];
+    document.getElementById("wm-ocr-position").value = ocrPosition;
+    var codeData = 1;
+    document.getElementById("wm-code-data").value = codeData;
+    document.getElementById("wm-camera-info").submit();
+
     function drawLine(begin, end, color) {
         canvas.beginPath();
         canvas.moveTo(begin.x, begin.y);
