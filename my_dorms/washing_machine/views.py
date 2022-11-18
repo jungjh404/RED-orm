@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.utils import timezone
 from .models import Washing_Machine, Usage_Status, Reservation
 from .ocr import img_ocr
-from .webpush import episode_webpush
+from .webpush import machine_done_webpush
 
 # Create your views here.
 @login_required(login_url='common:login')
@@ -18,7 +18,7 @@ def status(request):
             status_dict = {
                 'machine_id': machine
             }
-            recent_use = machine.usage.order_by('-end_time').first()
+            recent_use = machine.usage.filter(done=False).order_by('-end_time').first()
             if recent_use is not None:
                 status_dict['start_time'] = recent_use.start_time.timestamp()
                 status_dict['end_time'] = recent_use.end_time.timestamp()
@@ -28,7 +28,7 @@ def status(request):
         "building": request.user.building,
         "status_lst": status_lst
     }
-    episode_webpush(1)
+    
     return render(request, 'washing_machine/status.html', status_form)
 
 @login_required(login_url='common:login')
@@ -45,6 +45,7 @@ def add(request):
         1-1 다른세탁기에서 사용중이면 reject
         2. ocr invalid format일때 처리
         3. test_html 바꾸기
+        4. 구독중 구별해서 주기
         '''
         ocr_result = img_ocr(img)
         
@@ -64,3 +65,13 @@ def add(request):
 @login_required(login_url='common:login')
 def camera(request):
     return render(request, 'washing_machine/test_camera.html')
+
+def alarm_check():
+    done_states = Usage_Status.objects.filter(end_time__lt=timezone.now(), done=False)
+    
+    if len(done_states) != 0:
+        for state in done_states:
+            state.done = True
+            #알람도 추가해야함.
+            machine_done_webpush(state)
+            state.save()
