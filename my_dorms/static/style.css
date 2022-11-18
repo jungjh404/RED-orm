@@ -9,6 +9,7 @@ input[type=submit] {
 }
 
 /********홍구님 시작********/
+/* status */
 .wm-container-appbar{
   font-family: 'Noto Sans KR', sans-serif;
   position: absolute;
@@ -22,6 +23,8 @@ input[type=submit] {
   color: white;
   font-size: 1.5em;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }
 
 .wm-container-dorminfo{
@@ -161,6 +164,8 @@ input[type=submit] {
   padding: 20px 0px 20px 0px;
 }
 
+/* camera */
+
 #wm-description-qr{
   font-family: 'Noto Sans KR', sans-serif;
   color: white;
@@ -178,6 +183,60 @@ input[type=submit] {
   font-family: 'Noto Sans KR', sans-serif;
   color: white;
   font-weight: 1em;
+}
+
+.wm-container-popup{
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -35%);
+  width: 200px;
+  background-color: white;
+  text-align: center;
+  border: 3px solid gray;
+}
+
+.wm-container-popup span{
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.wm-container-popup-title{
+  text-align: left;
+  background-color: #1C6758;
+  padding: 5px 10px;
+}
+
+.wm-popup-title{
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
+.wm-popup-description{
+  font-size: 1.5em;
+}
+
+.wm-container-popup-description{
+  margin-top: 30px;
+}
+
+#wm-ocr-time-input{
+  font-size: 2em;
+  width: 80px;
+  text-align: right;
+  background-color: lightcyan;
+}
+
+.wm-container-popup-button{
+  margin-top: 50px;
+  display: flex;
+}
+
+.wm-container-popup-button button{
+  background-color: white;
+  font-size: 1.5em;
+  flex-grow: 1;
+  cursor: pointer;
 }
   
 /********홍구님 끝********/

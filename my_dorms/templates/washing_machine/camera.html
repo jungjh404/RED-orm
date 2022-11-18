@@ -14,12 +14,29 @@
   <div hidden><b>Data:</b> <span id="wm-outputData"></span></div>
 </div>
 
+<!-- ocr data to be sent after QR reading -->
 <form method="post" action="{% url 'washing_machine:add' %}" id="wm-camera-info">
   {% csrf_token%}
   <input type="hidden" name="ocr-image" id="wm-ocr-image" value="">
   <input type="hidden" name="ocr-position" id="wm-ocr-position" value="">
   <input type="hidden" name="code-data" id="wm-code-data" value=""> 
 </form>
+
+
+<div class="wm-container-popup">
+  <div class="wm-container-popup-title">
+    <span class="wm-popup-title">세탁기 이름</span>
+  </div>
+  <div class="wm-container-popup-description">
+    <span class="wm-popup-description">-남은 시간-</span><br><br>
+    <input type="text" name="ocr-time" id="wm-ocr-time-input" value=""><span class="wm-popup-description">  분</span>
+  </div>
+  <div class="wm-container-popup-button">
+    <button type="button">취소</button>
+    <button type="button">확인</button>
+  </div>
+</div>
+
 
 <script src="{%static './js/CamScript.js' %}"></script>
 {% endblock %}
