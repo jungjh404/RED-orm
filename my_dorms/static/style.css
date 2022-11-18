@@ -28,16 +28,13 @@ input[type=submit] {
 }
 
 .wm-container-dorminfo{
-  position: fixed;
+  margin: 50px auto;
   width: 250px;
   background-color: white;
   border: solid;
   border-width: 3px;
   border-color: black;
   border-radius: 10px;
-  top: 15%;
-  left: 50%;
-  transform: translate( -50%, 0% );
 }
 
 #wm-dorminfo{
@@ -48,11 +45,11 @@ input[type=submit] {
 }
 
 .wm-container-washingmachine{
-  margin: auto;
-  margin-top: 330px;
-  display: flex;
-  gap: 30px;
-  width: fit-content;
+  margin: 100px 20px 220px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  place-items: center;
+  grid-row-gap: 20px;
 }
 
 .wm-container-washingmachine-element{
@@ -237,6 +234,18 @@ input[type=submit] {
   font-size: 1.5em;
   flex-grow: 1;
   cursor: pointer;
+}
+
+/* error message */
+.wm-container-error-message{
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: #ebeff0;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 15px;
 }
   
 /********홍구님 끝********/
