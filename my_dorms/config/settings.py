@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpush',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/dorms/'
 LOGOUT_REDIRECT_URL = '/common/main'
 AUTH_USER_MODEL = "common.User"
+
+# Webpush
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BJtzgCR2sAprR9PlOMCzd2YhpfOM0gLQzshQ9m_7BALVK4OmKF0fgTtbg_Pcxy1rPGEI--7kaSgp1Y3vVbg3C5U",
+    "VAPID_PRIVATE_KEY":"L2cxmzL_ZR_IcoE5x0VnexN097Pa2oOQYjpyjru1DWY",
+    "VAPID_ADMIN_EMAIL": "admin@example.com"
+}

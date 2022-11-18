@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.utils import timezone
 from .models import Washing_Machine, Usage_Status, Reservation
 from .ocr import img_ocr
-
+from .webpush import episode_webpush
 
 # Create your views here.
 @login_required(login_url='common:login')
@@ -27,7 +27,7 @@ def status(request):
         "building": request.user.building,
         "status_lst": status_lst
     }
-
+    episode_webpush(1)
     return render(request, 'washing_machine/status.html', status_form)
 
 @login_required(login_url='common:login')
