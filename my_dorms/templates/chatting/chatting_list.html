@@ -1,0 +1,21 @@
+{% extends "dorms/base.html" %}
+{% block content %}
+<div class="logo_text" style="font-size: 1.5em; margin-bottom: 20px;">
+    {{ user.name }} 님의 채팅리스트
+</div>
+
+<div class="chatting_list">
+    <div class="chatting_list_element" onclick="location.href='//127.0.0.1:8000/massenger/chatting_room'">
+        <div class="chatting_info_box">
+            <div style="float: left; width: 50%;"><p style="margin-left: 20px;"><b>닉네임</b></p></div>
+            <div style="float: right; width: 50%; text-align: right;"><p style="margin-right: 20px;">11-12</p></div>
+        </div>
+        <div class="chatting_list_content_box">
+            <p style="margin-left: 20px;">asdfasdf</p>
+        </div>
+    </div>
+</div>
+
+<a href="//127.0.0.1:8000/massenger/add_chatting" class="add_chatting_button"></a>
+
+{% endblock %}
