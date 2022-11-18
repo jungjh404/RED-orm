@@ -1,13 +1,19 @@
 $(document).ready(function() {
-    console.log("length: " + $('.wm-container-error-message').length);
+    // display error message if exist
     if($('.wm-container-error-message').length){
-        console.log("error message");
         window.setTimeout(function() {
             $(".wm-container-error-message").fadeTo(500, 0).slideUp(500, function(){
                 $(this).remove();
             });
         }, 2000);
     }
+
+    // subscribe button style
+    $('.wm-webpush-button').on('mousedown', function() {
+        $('.wm-webpush-button').css('background-color', 'gray');
+        $('.wm-webpush-button').css('box-shadow', '');
+        $('.wm-webpush-button').css('opacity', '0.6');
+    });
 
     $('body').css('background-color', '');
     var date = new Date();

@@ -87,7 +87,7 @@ window.onload = function() {
                 img_canvas.width = test_image.width;
                 img_canvas.height = test_image.height;
                 img_ctx.drawImage(test_image, 0, 0);
-                var base64 = img_canvas.toDataURL('image/*');
+                var base64 = img_canvas.toDataURL('image/jpg');
                 var strImage = base64.replace(/^data:image\/[a-z]+;base64,/, "");
 
                 document.getElementById("wm-ocr-image").value = strImage;

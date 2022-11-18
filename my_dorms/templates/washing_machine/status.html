@@ -25,6 +25,10 @@
   </div>
 </nav>
 
+<div class="wm-container-webpush">
+  {% webpush_button with_class="wm-webpush-button"%}
+</div>
+
 {% if status_lst %}
   <div class="wm-container-dorminfo">
     <span id="wm-dorminfo">{{ building }}</span>
@@ -48,7 +52,6 @@
 
 <div class="wm-container-button-use">
   <button type="button" id="wm-button-use" onclick="UseButtonClicked()"><img src="{%static './assets/button_use.png' %}" alt="button_use"></button>
-  {% webpush_button %}
 </div>
 
 {% for message in messages %}

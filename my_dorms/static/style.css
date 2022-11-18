@@ -27,6 +27,22 @@ input[type=submit] {
   justify-content: space-between;
 }
 
+.wm-container-webpush{
+  margin: 50px auto;
+  width: 100%;
+  text-align: center;
+}
+
+.wm-webpush-button{
+  font-family: 'Noto Sans KR', sans-serif;
+  border: none;
+  padding: 10px 15px;
+  background-color: #3b1c64;
+  color: white;
+  box-shadow: 5px 5px 5px gray;
+  border-radius: 10px;
+}
+
 .wm-container-dorminfo{
   margin: 50px auto;
   width: 250px;
