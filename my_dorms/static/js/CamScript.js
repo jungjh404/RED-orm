@@ -72,6 +72,9 @@ window.onload = function() {
                 var codeData = code.data;
                 document.getElementById("wm-code-data").value = codeData;
                 document.getElementById("wm-camera-info").submit();
+
+                document.getElementById("wm-loader").hidden = false;
+                
                 isSent = true;
 
                 outputMessage.hidden = true;

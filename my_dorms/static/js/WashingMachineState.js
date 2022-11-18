@@ -8,13 +8,6 @@ $(document).ready(function() {
         }, 2000);
     }
 
-    // subscribe button style
-    $('.wm-webpush-button').on('mousedown', function() {
-        $('.wm-webpush-button').css('background-color', 'gray');
-        $('.wm-webpush-button').css('box-shadow', '');
-        $('.wm-webpush-button').css('opacity', '0.6');
-    });
-
     $('body').css('background-color', '');
     var date = new Date();
     var date_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
@@ -29,11 +22,9 @@ $(document).ready(function() {
         var target_elem = '.wm-container-washingmachine-element:nth-child(' + i + ')';
         var end_time = $(target_elem + ' .wm-time-washingmachine').text();
         var start_time = $(target_elem + ' .wm-starttime-washingmachine').text();
-        var current_machine_time = end_time - date_sec;
-        var duration_machine_time = end_time - start_time;
 
         // machine ended. display ok
-        if(current_machine_time < 0){
+        if(end_time === ''){
             $(target_elem + ' .wm-time-washingmachine').text('OK');
             $(target_elem + ' .wm-time-washingmachine').css('color', 'black');
             $(target_elem + ' .wm-circular-progress-time').toggleClass('ok');
@@ -43,7 +34,12 @@ $(document).ready(function() {
         }
         // machine not ended.
         else{
-            var current_machine_time_minutes = Math.floor(current_machine_time / 60);
+            var current_machine_time = end_time - date_sec;
+            var duration_machine_time = end_time - start_time;
+            var current_machine_time_minutes
+            if(current_machine_time <= 0) current_machine_time_minutes = 0;
+            else current_machine_time_minutes = Math.floor(current_machine_time / 60);
+
             $(target_elem + ' .wm-time-washingmachine').text(current_machine_time_minutes + "분");
             UpdateTimeBar(target_elem, current_machine_time, duration_machine_time);
             $(target_elem + ' .wm-button-washingmachine').css('opacity', '0.6');

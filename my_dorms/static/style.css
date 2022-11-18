@@ -45,19 +45,20 @@ input[type=submit] {
 
 .wm-container-dorminfo{
   margin: 50px auto;
-  width: 250px;
+  width: 150px;
   background-color: white;
   border: solid;
   border-width: 3px;
   border-color: black;
   border-radius: 10px;
+  text-align: center;
 }
 
 #wm-dorminfo{
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 1.5em;
   font-weight: bold;
-  padding: 20px 20px;
+  padding: 20px 0px;
 }
 
 .wm-container-washingmachine{
@@ -262,6 +263,29 @@ input[type=submit] {
   padding: 5px 20px;
   border: none;
   border-radius: 15px;
+}
+
+/* loading */
+.wm-container-loader{
+  margin: 150px auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.wm-loader{
+  border: 16px solid black;
+  border-radius: 50%;
+  border-top: 16px solid white;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1s linear infinite;
+}
+
+@keyframes spin{
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(240deg); }
+  100% { transform: rotate(360deg); }
 }
   
 /********홍구님 끝********/
