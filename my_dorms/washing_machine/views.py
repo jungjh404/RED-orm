@@ -1,6 +1,10 @@
+import datetime
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Washing_Machine, Usage_Status, Reservation
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils import timezone
+from .models import Washing_Machine, Usage_Status, Reservation
+from .ocr import img_ocr
 
 
 # Create your views here.
@@ -29,12 +33,26 @@ def status(request):
 @login_required(login_url='common:login')
 def add(request):
     if(request.method == 'POST'):
+        current_time = timezone.now()
         img = request.POST["ocr-image"]
         pos = request.POST["ocr-position"]
         code = request.POST["code-data"]
+        machine = Washing_Machine.objects.get(id=code)
+        ocr_result = img_ocr(img)
         
-        return redirect('washing_machine:status')
+        if ocr_result is not None:
+            Usage_Status.objects.create(
+                machine_id=machine,
+                user_id=request.user,
+                start_time=current_time,
+                modified_time=current_time,
+                end_time=current_time + datetime.timedelta(minutes=ocr_result)
+            )
+            return redirect('washing_machine:add')
+
+    messages.warning(request, "다시 촬영해주세요.")
+    return redirect('washing_machine:status')
 
 @login_required(login_url='common:login')
 def camera(request):
-    return render(request, 'washing_machine/camera.html')
+    return render(request, 'washing_machine/test_camera.html')
