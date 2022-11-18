@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'dorms.apps.DormsConfig',
     'common.apps.CommonConfig',
+    'washing_machine.apps.WashingMachineConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
