@@ -1,4 +1,5 @@
 {% load static %}
+{% load webpush_notifications %}
 <!doctype html>
 <html lang="ko">
 <head>
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <!-- pybo CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    {% webpush_header %}
     <title>DORMS</title>
 </head>
 <body>

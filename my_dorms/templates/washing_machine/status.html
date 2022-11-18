@@ -1,6 +1,8 @@
 {% extends "dorms/base.html" %}
 {% block content %}
 {% load static %}
+{% load webpush_notifications %}
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 <nav style="background-color: #1c6758;"class="navbar border-bottom">
@@ -43,8 +45,10 @@
   </div>
 {% endif %}
 
+
 <div class="wm-container-button-use">
   <button type="button" id="wm-button-use" onclick="UseButtonClicked()"><img src="{%static './assets/button_use.png' %}" alt="button_use"></button>
+  {% webpush_button %}
 </div>
 
 {% for message in messages %}
