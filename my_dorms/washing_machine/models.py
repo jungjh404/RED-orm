@@ -19,6 +19,7 @@ class Usage_Status(models.Model):
     start_time = models.DateTimeField()
     modified_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    done = models.BooleanField()
 
     def __str__(self):
         return f'{self.machine_id} {self.user_id}'
