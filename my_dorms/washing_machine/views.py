@@ -1,4 +1,5 @@
 import datetime
+import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -36,8 +37,15 @@ def add(request):
         current_time = timezone.now()
         img = request.POST["ocr-image"]
         pos = request.POST["ocr-position"]
-        code = request.POST["code-data"]
+        code = json.loads(request.POST["code-data"])["id"]
         machine = Washing_Machine.objects.get(id=code)
+        
+        '''
+        1. 이미 존재하는 세탁기면 ocr요청금지
+        1-1 다른세탁기에서 사용중이면 reject
+        2. ocr invalid format일때 처리
+        3. test_html 바꾸기
+        '''
         ocr_result = img_ocr(img)
         
         if ocr_result is not None:

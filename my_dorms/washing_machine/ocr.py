@@ -35,10 +35,10 @@ def img_ocr(base64_str):
   
   result = None
 
-  result_json = response.text
+  result_json = json.loads(response.text)
+
   if result_json["images"][0]["message"] == "SUCCESS":
     num_ocr = result_json["images"][0]["fields"][0]
-    
     if num_ocr["name"] == "num":
       result = num_ocr["inferText"]
       if result.isdigit():

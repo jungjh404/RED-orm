@@ -140,3 +140,14 @@ WEBPUSH_SETTINGS = {
     "VAPID_PRIVATE_KEY":"L2cxmzL_ZR_IcoE5x0VnexN097Pa2oOQYjpyjru1DWY",
     "VAPID_ADMIN_EMAIL": "admin@example.com"
 }
+
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+]
+
+
+MAX_UPLOAD_SIZE = 5242880
+DATA_UPLOAD_MAX_MEMORY_SIZE = None
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None

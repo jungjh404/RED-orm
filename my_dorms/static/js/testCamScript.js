@@ -55,8 +55,6 @@ window.onload = function() {
             if (code
                 && code.location.topLeftCorner.x > (canvasElement.width * 0.25) && code.location.topLeftCorner.y > (canvasElement.height * 0.1)
                 && code.location.bottomRightCorner.x < (canvasElement.width * 0.75) && code.location.bottomRightCorner.y < (canvasElement.height * 0.1 + canvasElement.width * 0.5)
-                && code.location.topLeftCorner.x < (canvasElement.width * 0.3) && code.location.topLeftCorner.y < (canvasElement.height * 0.1 + canvasElement.width * 0.05)
-                && code.location.bottomRightCorner.x > (canvasElement.width * 0.7) && code.location.bottomRightCorner.y > (canvasElement.height * 0.1 + canvasElement.width * 0.05 + canvasElement.width * 0.4)
                 && !isSent) {
                 drawLine(code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
                 drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
