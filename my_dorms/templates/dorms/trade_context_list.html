@@ -39,7 +39,7 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>
-                    <a href="{% url 'dorms:trade_detail' context.id %}">{{ context.title }}</a>
+                    <a style="color: black; text-decoration-line: none;" href="{% url 'dorms:trade_detail' context.id %}">{{ context.title }}</a>
                 </td>
 
                 <td>{{ context.writer.username }}</td>
