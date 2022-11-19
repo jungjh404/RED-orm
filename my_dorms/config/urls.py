@@ -21,5 +21,7 @@ urlpatterns = [
     path('dorms/', include('dorms.urls')),
     path('common/', include('common.urls')),
     path('washing_machine/', include('washing_machine.urls')),
-    re_path(r'^webpush/', include('webpush.urls'))
+    re_path(r'^webpush/', include('webpush.urls')),
+    path('conversations/',include('conversations.urls')),
+
 ]
