@@ -1,0 +1,76 @@
+{% extends "dorms/base.html" %}
+{% block content %}
+<nav style="background-color: #1c6758;"class="navbar border-bottom">
+  <div id="d-nav" class="container-fluid">
+      <ul class="navbar-nav">
+          <li class="nav-item">
+              <div style="color: white" class="nav-link" onClick="history.go(-1)">뒤로가기</div>
+          </li>
+      </ul>
+      <a style="color: white" class="navbar-brand" href="{% url 'common:main' %}">RED:orm</a>
+      <ul>      </ul>
+  </div>
+</nav>
+
+<div class = "register_box">
+  <div><p class="logo_text">RED:orm</p></div>
+  <form method="post" action="{% url 'common:signup' %}" style="margin-top: 20px;">
+    {% csrf_token %}
+    {% include "common/form_errors.html" %}
+    <div>
+      <b class="register_field">ID</b> <br>
+      <input type="text" class="register_input_field" name="username" id="username" placeholder="ID" 
+        value="{{ form.username.value|default_if_none:'' }}">
+    </div>
+
+    <div style="margin-top: 10px;">
+      <b class="register_field">비밀번호</b> <br>
+      <input type="password" class="register_input_field" name="password1" id="password1" placeholder="PW" 
+      value="{{ form.password1.value|default_if_none:'' }}">
+    </div>
+
+    <div>
+      <input type="password"class="register_input_field" name="password2" id="password2" placeholder="PW Repeat"
+      value="{{ form.password2.value|default_if_none:'' }}">
+    </div>
+
+    <div style="margin-top: 10px;">
+      <b class="register_field">닉네임</b> <br>
+      <input type="text" class="register_input_field" name="name" id="name" placeholder="User Name"
+        value="{{ form.username.value|default_if_none:'' }}">
+    </div>
+
+    <div style="margin-top: 10px;">
+      <b class="register_field">기숙사 건물</b> <br>
+      <select class="register_input_field" name="building" id="building">
+        <option value="">***기숙사 건물***</option>
+        <option value="인관">인관</option>
+        <option value="의관">의관</option>
+        <option value="예관">예관</option>
+        <option value="지관">지관</option>
+        <option value="신관A">신관A</option>
+        <option value="신관B">신관B</option>
+      </select>
+    </div>
+
+    <div style="margin-top: 10px;">
+      <b class="register_field">성별</b> <br>
+      <select class="register_input_field" name="gender" id="gender">
+        <option value="">***성별***</option>
+        <option value="남학생">남학생</option>
+        <option value="여학생">여학생</option>
+      </select>
+    </div>
+
+    <div style="margin-top: 10px;">
+      <b class="register_field">방 호수</b> <br>
+      <input type="number" class="register_input_field" name="room_num" id="room_num" placeholder="Room Number (Ex. 123)"
+        value="room_num">
+    </div>
+
+    <button type="submit" class="register_button">회원가입</button>
+  </form>
+
+</div>
+
+{% endblock %}

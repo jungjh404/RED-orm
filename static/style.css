@@ -1,0 +1,644 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+textarea {
+    width:100%;
+}
+
+input[type=submit] {
+    margin-top:10px;
+}
+
+/********홍구님 시작********/
+/* status */
+.wm-container-appbar{
+  font-family: 'Noto Sans KR', sans-serif;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+  text-align: center;
+  background-color: #1C6758;
+  padding: 10px 0 10px 0;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wm-container-webpush{
+  margin: 50px auto;
+  width: 100%;
+  text-align: center;
+}
+
+.wm-webpush-button{
+  font-family: 'Noto Sans KR', sans-serif;
+  border: none;
+  padding: 10px 15px;
+  background-color: #3b1c64;
+  color: white;
+  box-shadow: 5px 5px 5px gray;
+  border-radius: 10px;
+}
+
+.wm-container-dorminfo{
+  margin: 50px auto;
+  width: 150px;
+  background-color: white;
+  border: solid;
+  border-width: 3px;
+  border-color: black;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#wm-dorminfo{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 20px 0px;
+}
+
+.wm-container-washingmachine{
+  margin: 100px 20px 220px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  place-items: center;
+  grid-row-gap: 20px;
+}
+
+.wm-container-washingmachine-element{
+  position: relative;
+  width: 122px;
+}
+
+.wm-button-washingmachine{
+  background-color: transparent;
+  border: none;
+}
+
+.wm-button-washingmachine img{
+  width: 122px;
+}
+
+.wm-button-washingmachine-reservation{
+  background-color: transparent;
+  border: none;
+}
+
+.wm-button-washingmachine-reservation img{
+  width: 40px;
+  position: absolute;
+  top: -10%;
+  right: -20%;
+}
+
+.wm-name-washingmachine{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: left;
+  position: absolute;
+  top: 2.5%;
+  left: 15%;
+}
+
+.wm-circular-progress-time{
+  position: absolute;
+  background-color: #1C6758;
+  width: 89px;
+  height: 89px;
+  border-radius: 50%;
+  top: 50%;
+  left: 55%;
+  transform: translate( -50%, -50% );
+  background: conic-gradient(rgb(28, 103, 88) 30deg, rgb(237, 237, 237) 0deg);
+}
+
+.wm-circular-progress-time::before{
+  content: "";
+  position: absolute;
+  background-color: white;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: solid;
+  border-width: 1px;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+}
+
+.wm-circular-progress-time.ok::before{
+  content: "";
+  position: absolute;
+  background-color: #c1edbe;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: solid;
+  border-width: 1px;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+}
+
+.wm-time-washingmachine{
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #1C6758;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate( -50%, -50% );
+}
+
+.wm-container-button-use{
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+}
+
+#wm-button-use{
+  background-color: transparent;
+  border: none;
+}
+
+#wm-button-use img{
+  width: 150px;
+  height: 150px;
+}
+
+.wm-container-description{
+  text-align: center;
+  padding: 20px 0px 20px 0px;
+}
+
+/* camera */
+
+#wm-description-qr{
+  font-family: 'Noto Sans KR', sans-serif;
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#wm-outputMessage{
+  font-family: 'Noto Sans KR', sans-serif;
+  color: white;
+  font-weight: 1em;
+}
+
+#wm-outputData{
+  font-family: 'Noto Sans KR', sans-serif;
+  color: white;
+  font-weight: 1em;
+}
+
+.wm-container-popup{
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -35%);
+  width: 200px;
+  background-color: white;
+  text-align: center;
+  border: 3px solid gray;
+}
+
+.wm-container-popup span{
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.wm-container-popup-title{
+  text-align: left;
+  background-color: #1C6758;
+  padding: 5px 10px;
+}
+
+.wm-popup-title{
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+
+.wm-popup-description{
+  font-size: 1.5em;
+}
+
+.wm-container-popup-description{
+  margin-top: 30px;
+}
+
+#wm-ocr-time-input{
+  font-size: 2em;
+  width: 80px;
+  text-align: right;
+  background-color: lightcyan;
+}
+
+.wm-container-popup-button{
+  margin-top: 50px;
+  display: flex;
+}
+
+.wm-container-popup-button button{
+  background-color: white;
+  font-size: 1.5em;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+/* error message */
+.wm-container-error-message{
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: #ebeff0;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 15px;
+}
+
+/* loading */
+.wm-container-loader{
+  margin: 150px auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.wm-loader{
+  border: 16px solid black;
+  border-radius: 50%;
+  border-top: 16px solid white;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1s linear infinite;
+}
+
+@keyframes spin{
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(240deg); }
+  100% { transform: rotate(360deg); }
+}
+  
+/********홍구님 끝********/
+
+
+
+/********지혜님 시작********/
+
+/********지혜님 끝********/
+
+
+
+/********경식님 시작********/
+.up_bar {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.logo_text {
+    text-align: center;
+    color :#1c6758;
+    font-weight: bold;
+    font-size: 2em;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: auto; 
+}
+
+.login_link {
+    margin-top: 25px;
+    margin-right: 5px;
+    float: right;
+    color :#999;
+    font-size: 0.5em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main_additional_link {
+    float: right;
+    margin-top: 3px;
+    color :#999;
+    font-size: 0.5em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main_notice_title {
+    margin-bottom: 5px;
+    text-align: left;
+    padding: 6px;
+    color: #1c6758;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main_notice_list {
+  padding : 3px; 
+  height: auto; 
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space:nowrap;    
+  color : #1c6758;
+}
+
+.main_notice_element {
+  color : #1c6758;
+  font-size: 0.5em;
+  text-decoration: none;
+}
+.content_grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+
+.content_box {
+    border: solid 4px #1c6758;
+    border-radius: 25px;
+    height: auto;
+}
+
+.laundry_box {
+  height: 180px;
+  border: solid 4px #1c6758;
+  background-image: url(./img/laundry.png);
+  background-size: cover;
+  border-radius: 25px;
+}
+
+.board_box {
+  height: 180px;
+  border: solid 4px #1c6758;
+  background-image: url(./img/note.png);
+  background-size: cover;
+  border-radius: 25px;
+}
+
+.float_button {
+  background-image: url(./img/message.png);
+  background-size: cover;
+  position:absolute;
+	width:60px;
+	height:60px;
+	bottom:20px;
+	right:20px;
+	background-color: #1c6758;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.login_box {
+    border: solid 5px #1c6758;
+    border-radius: 30px;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 150px;
+    text-align: center;
+}
+
+.login_grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 2fr 3fr;
+    row-gap: 5px;
+    width: 70%;
+    height: 120px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.login_input {
+    border: solid 1px #afafaf;
+    border-radius: 10px;
+}
+
+.login_button {
+    border: solid 1px #1c6758;
+    border-radius: 10px;
+    height: auto;
+    background-color: #1c6758;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+}
+
+.register_link {
+    color : #929292;
+    font-size: 0.7em;
+}
+
+.register_box {
+    border: solid 5px #1c6758;
+    border-radius: 30px;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 150px;
+    text-align: center;
+}
+
+.register_field {
+    float: left;
+    margin-left: 30px;
+    color: #1c6758;
+    font-size: 0.8em;
+}
+
+.register_input_field {
+    width: 80%;
+    border: solid 1px #afafaf;
+    border-radius: 10px;
+    font-size: small;
+}
+
+.register_button {
+    border: solid 1px #1c6758;
+    border-radius: 10px;
+    width: 80%;
+    height: auto;
+    margin-top: 30px;
+    background-color: #1c6758;
+    font-size: larger;
+    font-weight: bold;
+    color: white;
+}
+
+.profile_update_link {
+    text-decoration: none;
+    background-color: #1c6758;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.logout_link{
+    border-radius: 10px;
+    padding: 5px;
+
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+.chatting_list {
+    height: 100%;
+    width: 90%;
+    margin: auto;
+}
+
+.chatting_list_element{
+    border: 5px solid #1c6758;
+    border-radius: 20px;
+    height: max-content;
+    width: 99%;
+}
+
+.chatting_info_box {
+    height: 100%;
+    font-size: 1em;
+}
+
+.chatting_list_content_box {
+    font-size: 0.5em;
+}
+
+.add_chatting_button {
+  background-image: url(./img/add.png);
+  background-size: cover;
+  position:absolute;
+	width:60px;
+	height:60px;
+	bottom:20px;
+	right:20px;
+	background-color: #1c6758;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.chatting_under_box {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 150px;
+    border-top : 6px solid #1c6758;
+    box-shadow: 0px -5px 5px #999999;
+}
+
+.chatting_input_area {
+    float: left;
+    width: 80%;
+}
+
+.chatting_button_area{
+    float: right;
+    width: 20%;
+}
+
+#chat-message-input {
+    border: 3px solid #1c6758;
+    margin: auto;
+    margin-top: 40px;
+    margin-left: 20px;
+    border-radius: 50px;
+    width: 90%;
+    font-size: 50px;
+    height: auto;
+    height: auto;
+}
+
+#chat-message-submit {
+    background-image: url(./img/send.png);
+    height: 100px;
+    width: 100px;
+    background-size: cover;
+    border: none;
+    border-radius: 50px;
+    margin: auto;
+    margin-top: 27px;
+    margin-left: 30px;
+    font-size: 2.5em;
+}
+
+.chatting_content {
+    width: 100%;
+    height: 85%;
+    margin-top: 150px;
+    margin-bottom: 170px;
+    overflow: hidden;
+    -ms-overflow-style: none;
+}
+
+.my_chat {
+    margin-top: 20px;
+
+    width: 70%;
+    float: right;
+    text-align: right;
+    color: white;
+    font-size: 2em;
+
+    border-radius: 20px;
+    padding: 10px;
+
+    word-wrap: break-word;
+
+    background-color: #258d78;
+}
+
+.other_chat {
+    margin-top: 20px;
+
+    width: 70%;
+    float: left;
+    text-align: left;
+    font-size: 2em;
+
+    word-wrap: break-word;
+
+    border : 3px solid #258d78;
+    border-radius: 20px;
+    padding: 10px;
+
+}
+
+.chatting_upper_box {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 150px;
+    background-color: #1c6758;
+    box-shadow: 0px 5px 5px #999999;
+
+    text-align: center;
+}
+
+.chatting_room_name {
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 3em;
+    color: white;
+}
+
+/********경식님 끝********/

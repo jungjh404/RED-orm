@@ -1,0 +1,37 @@
+{% extends "dorms/base.html" %}
+{% block content %}
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{%static './js/jsQR.js' %}"></script>
+
+<div class="wm-container-description">
+  <span class="wm-description" id="wm-description-qr">QR코드를<br>틀 안에 맞춰주세요.</span>
+</div>
+<div id="wm-loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
+<canvas id="wm-canvas" hidden></canvas>
+<div id="wm-output" hidden>
+  <div id="wm-outputMessage">No QR code detected.</div>
+  <div hidden><b>Data:</b> <span id="wm-outputData"></span></div>
+</div>
+
+<form method="post" action="{% url 'washing_machine:add' %}" id="wm-camera-info">
+  {% csrf_token%}
+  <input type="hidden" name="ocr-image" id="wm-ocr-image" value="">
+  <input type="hidden" name="ocr-position" id="wm-ocr-position" value="">
+  <input type="hidden" name="code-data" id="wm-code-data" value=""> 
+</form>
+
+<canvas id="wm-test-canvas" hidden></canvas>
+<img src="{%static './assets/washingmachine.png' %}" alt="test" id="wm-test-image" hidden>
+
+<script>
+    var wm_test_image_url = "{%static './assets/washingmachine_test_image.jpg' %}";
+</script>
+
+<!-- loading -->
+<div class="wm-container-loader">
+  <div class="wm-loader" id="wm-loader" hidden></div>
+</div>
+
+<script src="{%static './js/testCamScript.js' %}"></script>
+{% endblock %}
