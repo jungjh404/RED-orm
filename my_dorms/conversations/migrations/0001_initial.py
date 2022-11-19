@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Washing_Machine",
+            name="Room",
             fields=[
                 (
                     "id",
@@ -26,14 +26,15 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("building", models.CharField(max_length=100)),
-                ("floor", models.IntegerField()),
-                ("room", models.IntegerField()),
-                ("machine_num", models.IntegerField()),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
             ],
+            options={
+                "db_table": "room",
+            },
         ),
         migrations.CreateModel(
-            name="Usage_Status",
+            name="Message",
             fields=[
                 (
                     "id",
@@ -44,29 +45,34 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("start_time", models.DateTimeField()),
-                ("modified_time", models.DateTimeField()),
-                ("end_time", models.DateTimeField()),
-                ("done", models.BooleanField()),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                ("message", models.CharField(max_length=500)),
                 (
-                    "machine_id",
+                    "room_id",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT,
-                        related_name="usage",
-                        to="washing_machine.washing_machine",
+                        db_column="room_id",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="message",
+                        to="conversations.room",
                     ),
                 ),
                 (
                     "user_id",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT,
+                        db_column="user_id",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="message",
                         to=settings.AUTH_USER_MODEL,
                     ),
                 ),
             ],
+            options={
+                "db_table": "message",
+            },
         ),
         migrations.CreateModel(
-            name="Reservation",
+            name="Conversation",
             fields=[
                 (
                     "id",
@@ -77,21 +83,29 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("reservation_time", models.DateTimeField()),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
                 (
-                    "machine_id",
+                    "room_id",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT,
-                        to="washing_machine.washing_machine",
+                        db_column="room_id",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="conversations",
+                        to="conversations.room",
                     ),
                 ),
                 (
                     "user_id",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT,
+                        db_column="user_id",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="conversations",
                         to=settings.AUTH_USER_MODEL,
                     ),
                 ),
             ],
+            options={
+                "db_table": "conversations",
+            },
         ),
     ]

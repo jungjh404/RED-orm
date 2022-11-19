@@ -4,6 +4,6 @@ from . import views
 app_name = "conversations"
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<str:room_name>/', views.room, name="room")
+    path('', views.chat_view, name='conversations'),
+    path("<str:room_name>/", views.room_view, name="room"),  # /chat/room_number/ 으로 넘어오면 room 함수 실행
 ]
