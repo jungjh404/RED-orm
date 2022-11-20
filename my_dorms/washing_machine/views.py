@@ -40,9 +40,14 @@ def add(request):
         code = json.loads(request.POST["code-data"])["id"]
         machine = Washing_Machine.objects.get(id=code)
         
+
+        recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
+
+        if len(recent_use) > 0:
+            messages.warning(request, "이미 사용 중인 세탁기입니다.")
+            return redirect('washing_machine:status')
+
         '''
-        1. 이미 존재하는 세탁기면 ocr요청금지
-        1-1 다른세탁기에서 사용중이면 reject
         2. ocr invalid format일때 처리
         3. test_html 바꾸기
         4. 구독중 구별해서 주기
@@ -56,7 +61,8 @@ def add(request):
                 user_id=request.user,
                 start_time=current_time,
                 modified_time=current_time,
-                end_time=current_time + datetime.timedelta(minutes=ocr_result)
+                end_time=current_time + datetime.timedelta(minutes=ocr_result),
+                done=False
             )
             return redirect('washing_machine:add')
 
