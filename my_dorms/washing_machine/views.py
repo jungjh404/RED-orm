@@ -102,8 +102,7 @@ def reserve(request):
                 machine_id=machine,
                 user_id=request.user,
                 usage_id=recent_use[0],
-                reservation_time=current_time,
-                done=False
+                reservation_time=current_time
             )
             messages.warning(request, "등록이 완료되었습니다.")
             return redirect('washing_machine:status')
