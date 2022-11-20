@@ -1,0 +1,102 @@
+{% extends './base.html' %}
+{% block content %}
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">돔메이트구인 게시판 글쓰기</a>
+        <ul class="navbar-nav">
+
+            </ul>
+    </div>
+</nav>
+
+<div class = "container">
+  <h5 class="my-3 border-bottom pb-2">게시글등록</h5>
+  <form method="post">
+    {% csrf_token %}
+    <!-- 오류표시 Start -->
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+      {% for field in form %}
+      {% if field.errors %}
+      <div>
+        <strong>{{ field.label }}</strong>
+        {{ field.errors }}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- 오류표시 End -->
+    <div class="mb-3">
+      <label for="title" class="form-label">제목</label>
+      <input type="text" class="form-control" name="title" id="title"
+                   value="{{ form.title.value|default_if_none:'' }}">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">내용</label>
+      <textarea class="form-control" name="content"
+                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="age" class="form-label">나이</label>
+        <input type="number" class="form-control" name="age" id="age"
+            value="{{ form.age.value|default_if_none:'' }}">
+      </div>
+      <div class="mb-3">
+        <label for="awake_time" class="form-label">기상시간</label>
+        <div class="awake-box d-flex" id="awake_time" >
+            <input type="number" class="form-control w-25" name="time_awake_1" id="awake_time1"
+            value="{{ form.time_awake_1.value|default_if_none:'' }}">
+            ~
+            <input type="number" class="form-control w-25 " name="time_awake_2" id="awake_time2"
+            value="{{ form.time_awake_2.value|default_if_none:'' }}">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="tobed_time" class="form-label">잠자는 시간</label>
+        <div class="tobed-box d-flex" id="tobed_time" >
+            <input type="number" class="form-control w-25" name="time_sleep_1" id="tobed_time1"
+            value="{{ form.time_sleep_1.value|default_if_none:'' }}">
+            ~
+            <input type="number" class="form-control w-25 " name="time_sleep_2" id="tobed_time2"
+            value="{{ form.time_sleep_2.value|default_if_none:'' }}">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="building" class="form-label">기숙사 건물 </label>
+        <select class="register_input_field form-control" name="building" id="building">
+          <option value="">***기숙사 건물***</option>
+          <option value="인관">인관</option>
+          <option value="의관">의관</option>
+          <option value="예관">예관</option>
+          <option value="지관">지관</option>
+          <option value="신관A">신관A</option>
+          <option value="신관B">신관B</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="isSnoring" class="form-label">코골이 여부</label>
+        <input type="checkbox" class="form-control form-check-input" name="isSnoring" id="isSnoring"
+                   value="1">
+      </div>
+      <div class="mb-3">
+        <label for="isSmoking" class="form-label">흡연 여부</label>
+        <input type="checkbox" class="form-control form-check-input" name="isSmoking" id="isSmoking"
+                   value="1">
+      </div>
+      <div class="mb-3">
+        <label for="usingPC" class="form-label">데스크탑 사용여부</label>
+        <input type="checkbox" class="form-control form-check-input" name="usingPC" id="isSmoking"
+                   value="1">
+      </div>
+
+
+
+    <div class="position-relative">
+      <button style="background-color: #1c6758;" type="submit" class="btn btn-success position-absolute end-0">저장하기</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

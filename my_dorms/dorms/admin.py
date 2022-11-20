@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Context, Comment, Context_info, Comment_info, Context_free, Comment_free, Context_trade, Comment_trade, Comment_copur, Context_copur
+from .models import Context, Comment, Context_info, Comment_info, Context_free, Comment_free, Context_trade, Comment_trade, Comment_copur, Context_copur, Context_dormmate, Comment_dormmate
 
 # Register your models here.
 admin.site.register(Context)
@@ -12,3 +12,6 @@ admin.site.register(Context_trade)
 admin.site.register (Comment_trade)
 admin.site.register(Context_copur)
 admin.site.register (Comment_copur)
+admin.site.register(Context_dormmate)
+admin.site.register(Comment_dormmate)
+

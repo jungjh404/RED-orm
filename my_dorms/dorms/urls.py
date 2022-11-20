@@ -44,4 +44,12 @@ urlpatterns = [
     path ('copurchase/context/delete/<int:context_id>/', views.copurchase_context_delete, name='copurchase_context_delete'),
     path ('copurchase/context/comment/modify/<int:comment_id>/', views.copurchase_comment_modify, name='copurchase_comment_modify'),
     path ('copurchase/context/comment/delete/<int:comment_id>/', views.copurchase_comment_delete, name='copurchase_comment_delete'),
+    path ('dormmate/', views.dormmate_index, name='dormmate_index'),
+    path ('dormmate/<int:context_id>/', views.dormmate_detail, name='dormmate_detail'),
+    path ('dormmate/comment/create/<int:context_id>/', views.dormmate_comment_create, name='dormmate_comment_create'),
+    path ('dormmate/context/create/', views.dormmate_context_create, name = 'dormmate_context_create'),
+    path ('dormmate/context/modify/<int:context_id>/', views.dormmate_context_modify, name='dormmate_context_modify'),
+    path ('dormmate/context/delete/<int:context_id>/', views.dormmate_context_delete, name='dormmate_context_delete'),
+    path ('dormmate/context/comment/modify/<int:comment_id>/', views.dormmate_comment_modify, name='dormmate_comment_modify'),
+    path ('dormmate/context/comment/delete/<int:comment_id>/', views.dormmate_comment_delete, name='dormmate_comment_delete'),
 ]
