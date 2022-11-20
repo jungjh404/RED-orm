@@ -91,7 +91,7 @@ class Comment_trade (models.Model) :
 
 #돔메 구인
 class Dormmate_offer(TimeStampedModel):
-    
+    pass
 
 #공동 구매
 class Context_copur (models.Model) :
