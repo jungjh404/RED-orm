@@ -60,7 +60,8 @@ def add(request):
                 user_id=request.user,
                 start_time=current_time,
                 modified_time=current_time,
-                end_time=current_time + datetime.timedelta(minutes=ocr_result)
+                end_time=current_time + datetime.timedelta(minutes=ocr_result),
+                done=False
             )
             return redirect('washing_machine:add')
 
