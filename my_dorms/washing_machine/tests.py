@@ -4,7 +4,7 @@ from .ocr import img_ocr
 
 
 # Create your tests here.
-class TestOCR(TestCase):
+class WashingMachineTest(TestCase):
     def test_ocr(self):
         with open('./washing_machine/test.jpeg', 'rb') as img:
             base64_string = base64.b64encode(img.read())
