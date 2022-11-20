@@ -1,5 +1,5 @@
 from django import forms
-from dorms.models import Context, Comment, Context_info, Comment_info, Context_free, Comment_free, Context_trade, Comment_trade, Comment_copur, Context_copur
+from dorms.models import Context, Comment, Context_info, Comment_info, Context_free, Comment_free, Context_trade, Comment_trade, Comment_copur, Context_copur, Context_dormmate, Comment_dormmate
 
 class ContextForm (forms.ModelForm) :
     class Meta :
@@ -53,6 +53,18 @@ class CommentTradeForm(forms.ModelForm) :
             'content' : '답변내용'
         }
 
+class ContextDormmateForm (forms.ModelForm) :
+    class Meta :
+        model = Context_dormmate
+        fields = ['title', 'content', 'isSnoring', 'time_awake_1', 'time_awake_2','time_sleep_1', 'time_sleep_2', 'isSmoking', 'age', 'usingPC','building']    
+
+class CommentDormmateForm(forms.ModelForm) :
+    class Meta :
+        model = Comment_dormmate
+        fields = ['content']
+        labels = {
+            'content' : '답변내용'
+        }
 class ContextCopurForm (forms.ModelForm) :
     class Meta :
         model = Context_copur

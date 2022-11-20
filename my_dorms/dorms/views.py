@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseNotAllowed, HttpResponse
-from .models import Context, Comment, Context_info, Comment_info, Context_free, Comment_free, Context_trade, Comment_trade, Comment_copur, Context_copur
+from .models import Context, Comment, Context_info, Comment_info, Context_free, Comment_free, Context_trade, Comment_trade, Comment_copur, Context_copur, Context_dormmate, Comment_dormmate
 from django.utils import timezone
-from .forms import ContextForm, CommentForm, ContextInfoForm, CommentInfoForm, ContextFreeForm, CommentFreeForm, CommentTradeForm, ContextTradeForm, ContextCopurForm, CommentCopurForm
+from .forms import ContextForm, CommentForm, ContextInfoForm, CommentInfoForm, ContextFreeForm, CommentFreeForm, CommentTradeForm, ContextTradeForm, ContextCopurForm, CommentCopurForm, ContextDormmateForm, CommentDormmateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -388,6 +388,7 @@ def trade_context_delete(request, context_id) :
     context.delete()
     return redirect('dorms:trade_index')
 
+
 @login_required(login_url='common:login')
 def trade_comment_modify (request, comment_id) :
     comment = get_object_or_404(Comment_trade, pk=comment_id)
@@ -414,6 +415,7 @@ def trade_comment_delete(request, comment_id) :
     else :
         comment.delete()
     return redirect('dorms:trade_detail', context_id = comment.context.id)
+
 
 def copurchase_index (request) :
     context_list = Context_copur.objects.all()
@@ -516,3 +518,120 @@ def copurchase_comment_delete(request, comment_id) :
     else :
         comment.delete()
     return redirect('dorms:copurchase_detail', context_id = comment.context.id)
+
+
+
+def dormmate_index (request) :
+    context_list = Context_dormmate.objects.all()
+    context = {
+        'context_list': context_list
+    }
+    return render(request, 'dorms/dormmate_context_list.html', context)
+
+def dormmate_detail (request, context_id) :
+    content = get_object_or_404(Context_dormmate, pk=context_id)
+    context = {
+        'content': content,
+    }
+    return render(request, 'dorms/dormmate_context_detail.html', context)
+
+@login_required(login_url='common:login')
+def dormmate_comment_create(request, context_id) :
+    context = get_object_or_404(Context_dormmate, pk=context_id)
+    if request.user.is_authenticated:
+        comment_form = CommentDormmateForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.context = context
+            comment.writer = request.user
+            comment.create_date = timezone.now()
+            comment.save()
+            return redirect('dorms:dormmate_detail', context.id)
+    comment_list = Comment_dormmate.objects.filter(context=context)
+    con = {'content': context, 'comment_list': comment_list, 'form': comment_form}
+    return render(request, 'dorms/dormmate_context_detail.html', con)
+    
+@login_required(login_url='common:login')
+def dormmate_context_create(request) :
+    if request.method == 'POST' :
+        form = ContextDormmateForm(request.POST)
+        if form.is_valid() :
+            context = form.save(commit=False)
+            context.date = timezone.now()
+            context.writer = request.user
+            if(request.POST.get('isSnoring') == '1'):
+                context.isSnoring = True
+            else:
+                context.isSnoring = False
+
+            if(request.POST.get('isSmoking') == '1'):
+                context.isSmoking = True
+            else:
+                context.isSmoking = False
+
+            if(request.POST.get('usingPC') == '1'):
+                context.usingPC = True
+            else:
+                context.usingPC = False
+
+            context.save()
+            return redirect('dorms:dormmate_index')
+    else :
+        form = ContextDormmateForm()
+    context = {'form' : form}
+    return render (request, 'dorms/dormmate_context_form.html', context)
+
+@login_required(login_url='common:login')
+def dormmate_context_modify(request, context_id) :
+    context = get_object_or_404(Context_dormmate, pk=context_id)
+    if request.user != context.writer:
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('dorms:dormmate_detail', context_id=context.id)
+    if request.method == "POST":
+        form = ContextDormmateForm(request.POST, instance=context)
+        if form.is_valid():
+            context = form.save(commit=False)
+            context.modify_date = timezone.now()
+            context.save()
+            return redirect('dorms:dormmate_detail', context_id=context.id)
+    else:
+        form = ContextDormmateForm(instance=context)
+    content = {'form': form}
+    return render(request, 'dorms/dormmate_context_form.html', content)
+
+@login_required(login_url='common:login')
+def dormmate_context_delete(request, context_id) :
+    context = get_object_or_404(Context_dormmate, pk=context_id)
+    if request.user != context.writer :
+        messages.error(request, "수정권한이 없습니다")
+        return redirect('dorms:dormmate_detail', context_id=context.id)
+
+    context.delete()
+    return redirect('dorms:dormmate_index')
+
+@login_required(login_url='common:login')
+def dormmate_comment_modify (request, comment_id) :
+    comment = get_object_or_404(Comment_dormmate, pk=comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "수정권한이 없습니다.")
+        return redirect ('dorms:dormmate_detail', context_id = comment.context.id)
+    if request.method == 'POST' :
+        comment_form = CommentDormmateForm(request.POST, instance = comment)
+        if comment_form.is_valid() :
+            comment = comment_form.save(commit=False)
+            comment.modify_date = timezone.now()
+            comment.save()
+            return redirect('dorms:dormmate_detail', context_id = comment.context.id)
+    else :
+        comment_form = CommentDormmateForm(instance = comment)
+    context = {'comment' : comment, 'form' : comment_form}
+    return render (request, 'dorms/dormmate_comment_form.html', context)
+
+@login_required(login_url='common:login')
+def dormmate_comment_delete(request, comment_id) :
+    comment = get_object_or_404(Comment_dormmate, pk = comment_id)
+    if request.user != comment.writer :
+        messages.error(request, "삭제권한이 없습니다.")
+    else :
+        comment.delete()
+    return redirect('dorms:dormmate_detail', context_id = comment.context.id)

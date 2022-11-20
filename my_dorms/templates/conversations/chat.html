@@ -31,12 +31,14 @@
                         <p>참여중인 채팅방이 없습니다</p>
                     {% else %}
                     </div>
-                    <div class="chatroom-item"> 
+                    <div class="chatroom-items"> 
                         {% for key, value in chat_info.items %}
-                            <div class="img_profile"> </div>
-                            <a href="/conversations/{{ key }}">
-                                <div class="chat-room-a">{{ value.0 }} - {{ value.1 }} ({{value.2}}, {{value.3}}호)채팅방</div>
-                            </a>
+                            <div class="chatroom-item">
+                                <div class="img_profile"> </div>
+                                <a href="/conversations/{{ key }}">
+                                    <div class="chat-room-a">{{ value.0 }} - {{ value.1 }} ({{value.2}}, {{value.3}}호)채팅방</div>
+                                </a>
+                            </div>
                         {% endfor %}
                     </div>
                     
