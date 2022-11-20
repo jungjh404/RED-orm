@@ -1,6 +1,26 @@
 {% extends './base.html' %}
 {% block content %}
 
+<nav style="background-color: #1c6758;"class="navbar border-bottom">
+  <div id="d-nav" class="container-fluid">
+      <ul class="navbar-nav">
+          <li class="nav-item">
+              <div style="color: white" class="nav-link" onClick="history.go(-1)">뒤로가기</div>
+          </li>
+      </ul>
+      <a style="color: white" class="navbar-brand" href="{% url 'common:main' %}">RED:orm</a>
+      <ul class="navbar-nav">
+                  {% if user.is_authenticated %}
+                      <li class="nav-item">
+                          <a style="color: white" class="nav-link" href="{% url 'common:show' %}">프로필</a></li>
+                  {% else %}
+                      <li class="nav-item">
+                          <a style="color: white" class="nav-link" href="{% url 'common:login' %}">로그인</a></li>
+                  {% endif %}
+      </ul>
+  </div>
+</nav>
+
 <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
     <div class="container-fluid">
         <a class="navbar-brand" href="">정보게시판 글쓰기</a>

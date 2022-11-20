@@ -14,7 +14,7 @@
   <div hidden><b>Data:</b> <span id="wm-outputData"></span></div>
 </div>
 
-<form method="post" action="{% url 'washing_machine:add' %}" id="wm-camera-info">
+<form method="post" action="{% url 'washing_machine:reserve' %}" id="wm-camera-info">
   {% csrf_token%}
   <input type="hidden" name="ocr-image" id="wm-ocr-image" value="">
   <input type="hidden" name="ocr-position" id="wm-ocr-position" value="">

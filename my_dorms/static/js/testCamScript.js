@@ -82,14 +82,16 @@ window.onload = function() {
 
                 isSent = true;
 
-                outputMessage.hidden = true;
-                outputData.parentElement.hidden = false;
-                outputData.innerText = code.data;
+                //outputMessage.hidden = true;
+                //outputData.parentElement.hidden = false;
+                //outputData.innerText = code.data;
             } else {
                 outputMessage.hidden = false;
                 outputData.parentElement.hidden = true;
             }
         }
-        requestAnimationFrame(tick);
+        if(!isSent){
+            requestAnimationFrame(tick);
+        }
     }
 }
