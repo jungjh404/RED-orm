@@ -40,10 +40,13 @@ def add(request):
     img = request.POST["ocr-image"]
     pos = request.POST["ocr-position"]
     code = json.loads(request.POST["code-data"])["id"]
-    machine = Washing_Machine.objects.get(id=code)
+    machine = Washing_Machine.objects.filter(id=code)
+    if len(machine) == 0:
+        messages.warning(request, "잘못된 QR코드입니다.")
+        return redirect('washing_machine:status')
     
 
-    recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
+    recent_use = Usage_Status.objects.filter(machine_id=machine[0], done=False)
 
     if len(recent_use) > 0:
         messages.warning(request, "이미 사용 중인 세탁기입니다.")
@@ -74,15 +77,18 @@ def reserve(request):
         img = request.POST["ocr-image"]
         pos = request.POST["ocr-position"]
         code = json.loads(request.POST["code-data"])["id"]
-        machine = Washing_Machine.objects.get(id=code)
+        machine = Washing_Machine.objects.filter(id=code)
+        if len(machine) == 0:
+            messages.warning(request, "잘못된 QR코드입니다.")
+            return redirect('washing_machine:status')
         
-        recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
+        recent_use = Usage_Status.objects.filter(machine_id=machine[0], done=False)
 
         if len(recent_use) == 0:
             messages.warning(request, "사용 중이지 않은 세탁기입니다.")
             return redirect('washing_machine:status')
         
-        reserve_check = Reservation.objects.filter(machine_id=machine, usage_id=recent_use[0])
+        reserve_check = Reservation.objects.filter(machine_id=machine[0], usage_id=recent_use[0])
         if len(reserve_check) > 0:
             messages.warning(request, "이미 예약하셨습니다.")
             return redirect('washing_machine:status')
