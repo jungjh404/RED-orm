@@ -40,20 +40,21 @@ def add(request):
     img = request.POST["ocr-image"]
     pos = request.POST["ocr-position"]
     code = json.loads(request.POST["code-data"])["id"]
-    machine = Washing_Machine.objects.filter(id=code)
-    if len(machine) == 0:
+
+    try:
+        machine = Washing_Machine.objects.get(id=code)
+    except Washing_Machine.DoesNotExist:
         messages.warning(request, "잘못된 QR코드입니다.")
         return redirect('washing_machine:status')
-    
 
-    recent_use = Usage_Status.objects.filter(machine_id=machine.first(), done=False)
+    recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
 
     if len(recent_use) > 0:
         messages.warning(request, "이미 사용 중인 세탁기입니다.")
         return redirect('washing_machine:status')
 
     ocr_result = img_ocr(img)
-    
+
     if ocr_result is not None:
         Usage_Status.objects.create(
             machine_id=machine,
@@ -77,12 +78,13 @@ def reserve(request):
         img = request.POST["ocr-image"]
         pos = request.POST["ocr-position"]
         code = json.loads(request.POST["code-data"])["id"]
-        machine = Washing_Machine.objects.filter(id=code)
-        if len(machine) == 0:
+        try:
+            machine = Washing_Machine.objects.get(id=code)
+        except Washing_Machine.DoesNotExist:
             messages.warning(request, "잘못된 QR코드입니다.")
             return redirect('washing_machine:status')
         
-        recent_use = Usage_Status.objects.filter(machine_id=machine.first(), done=False)
+        recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
 
         if len(recent_use) == 0:
             messages.warning(request, "사용 중이지 않은 세탁기입니다.")
