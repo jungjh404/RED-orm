@@ -62,5 +62,5 @@ function UseTestButtonClicked(){
 }
 
 function ReservationButtonClicked(){
-    location.href = wm_cameraPage_url;
+    location.href = wm_reserve_cameraPage_url;
 }

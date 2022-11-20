@@ -43,7 +43,7 @@
           <span class="wm-time-washingmachine">{{ status.end_time }}</span>
           <span hidden class="wm-starttime-washingmachine">{{ status.start_time }}</span>
         </button>
-        <button type="button" class="wm-button-washingmachine-reservation"><img src="{%static './assets/button_reservation.png' %}" alt="button_reservation"></button>
+        <button type="button" class="wm-button-washingmachine-reservation" onclick="ReservationButtonClicked()"><img src="{%static './assets/button_reservation.png' %}" alt="button_reservation"></button>
       </div>
     {% endfor %}
   </div>
