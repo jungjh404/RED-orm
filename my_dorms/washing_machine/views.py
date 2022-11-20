@@ -90,7 +90,7 @@ def reserve(request):
             messages.warning(request, "사용 중이지 않은 세탁기입니다.")
             return redirect('washing_machine:status')
         
-        reserve_check = Reservation.objects.filter(machine_id=machine.first(), usage_id=recent_use[0])
+        reserve_check = Reservation.objects.filter(machine_id=machine, usage_id=recent_use[0])
         if len(reserve_check) > 0:
             messages.warning(request, "이미 예약하셨습니다.")
             return redirect('washing_machine:status')
