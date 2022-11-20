@@ -28,6 +28,7 @@ class Usage_Status(models.Model):
 class Reservation(models.Model):
     machine_id = models.ForeignKey(Washing_Machine, on_delete=models.PROTECT)
     user_id = models.ForeignKey(User, on_delete=models.PROTECT)
+    usage_id = models.ForeignKey(Usage_Status, on_delete=models.PROTECT)
     reservation_time = models.DateTimeField()
     
     def __str__(self):

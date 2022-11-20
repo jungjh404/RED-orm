@@ -18,7 +18,7 @@ def img_ocr(base64_str):
         }
     ],
     'requestId': str(uuid.uuid4()),
-    'version': 'V2',
+    'version': 'V3',
     'timestamp': int(round(time.time() * 1000)),
     'lang': 'ko'
   }
@@ -34,13 +34,17 @@ def img_ocr(base64_str):
   response = requests.request("POST", api_url, headers=headers, data = payload, files = files)
   
   result = None
-
+  
+  if response.status_code != 200:
+    return result
+  
   result_json = json.loads(response.text)
 
   if result_json["images"][0]["message"] == "SUCCESS":
     num_ocr = result_json["images"][0]["fields"][0]
     if num_ocr["name"] == "num":
       result = num_ocr["inferText"]
+
       if result.isdigit():
         return int(result)
   
@@ -50,4 +54,4 @@ def img_ocr(base64_str):
 if __name__ == "__main__":
   with open('./test.jpeg', 'rb') as img:
     base64_string = base64.b64encode(img.read())
-    img_ocr(base64_string)
+    print(img_ocr(base64_string))

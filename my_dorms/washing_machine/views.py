@@ -47,12 +47,6 @@ def add(request):
             messages.warning(request, "이미 사용 중인 세탁기입니다.")
             return redirect('washing_machine:status')
 
-        '''
-        2. ocr invalid format일때 처리
-        3. test_html 바꾸기
-        4. 구독중 구별해서 주기
-        5. redirect url 보기
-        '''
         ocr_result = img_ocr(img)
         
         if ocr_result is not None:
@@ -69,9 +63,52 @@ def add(request):
     messages.warning(request, "다시 촬영해주세요.")
     return redirect('washing_machine:status')
 
+
+@login_required(login_url='common:login')
+def reserve(request):
+    if(request.method == 'POST'):
+        current_time = timezone.now()
+        img = request.POST["ocr-image"]
+        pos = request.POST["ocr-position"]
+        code = json.loads(request.POST["code-data"])["id"]
+        machine = Washing_Machine.objects.get(id=code)
+        
+        recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
+
+        if len(recent_use) == 0:
+            messages.warning(request, "사용 중이지 않은 세탁기입니다.")
+            return redirect('washing_machine:status')
+        
+        reserve_check = Reservation.objects.filter(machine_id=machine, usage_id=recent_use[0])
+        if len(reserve_check) > 0:
+            messages.warning(request, "이미 예약하셨습니다.")
+            return redirect('washing_machine:status')
+
+        ocr_result = img_ocr(img)
+        
+        if ocr_result is not None:
+            Reservation.objects.create(
+                machine_id=machine,
+                user_id=request.user,
+                usage_id=recent_use[0],
+                reservation_time=current_time,
+                done=False
+            )
+            return redirect('washing_machine:add')
+
+    messages.warning(request, "다시 촬영해주세요.")
+    return redirect('washing_machine:status')
+
+
 @login_required(login_url='common:login')
 def camera(request):
     return render(request, 'washing_machine/test_camera.html')
+
+
+@login_required(login_url='common:login')
+def reserve_camera(request):
+    return render(request, 'washing_machine/test_reserve.html')
+
 
 def alarm_check():
     done_states = Usage_Status.objects.filter(end_time__lt=timezone.now(), done=False)
@@ -79,6 +116,8 @@ def alarm_check():
     if len(done_states) != 0:
         for state in done_states:
             state.done = True
+            
+            reserve_lst = Reservation.objects.filter(usage_id=state)
             #알람도 추가해야함.
-            machine_done_webpush(state)
+            machine_done_webpush(state, reserve_lst)
             state.save()
