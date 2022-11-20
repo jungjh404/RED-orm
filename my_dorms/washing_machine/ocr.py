@@ -18,7 +18,7 @@ def img_ocr(base64_str):
         }
     ],
     'requestId': str(uuid.uuid4()),
-    'version': 'V3',
+    'version': 'V2',
     'timestamp': int(round(time.time() * 1000)),
     'lang': 'ko'
   }

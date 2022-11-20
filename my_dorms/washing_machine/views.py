@@ -13,6 +13,9 @@ from .webpush import machine_done_webpush
 def status(request):
     status_lst = []
     if request.user.is_authenticated:
+        if request.user.building is None:
+            messages.warning(request, "회원정보를 업데이트해주세요.")
+            return redirect('common:profile')
         machine_lst = Washing_Machine.objects.filter(building=request.user.building)
         for machine in machine_lst:
             status_dict = {
@@ -33,32 +36,32 @@ def status(request):
 
 @login_required(login_url='common:login')
 def add(request):
-    if(request.method == 'POST'):
-        current_time = timezone.now()
-        img = request.POST["ocr-image"]
-        pos = request.POST["ocr-position"]
-        code = json.loads(request.POST["code-data"])["id"]
-        machine = Washing_Machine.objects.get(id=code)
-        
+    current_time = timezone.now()
+    img = request.POST["ocr-image"]
+    pos = request.POST["ocr-position"]
+    code = json.loads(request.POST["code-data"])["id"]
+    machine = Washing_Machine.objects.get(id=code)
+    
 
-        recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
+    recent_use = Usage_Status.objects.filter(machine_id=machine, done=False)
 
-        if len(recent_use) > 0:
-            messages.warning(request, "이미 사용 중인 세탁기입니다.")
-            return redirect('washing_machine:status')
+    if len(recent_use) > 0:
+        messages.warning(request, "이미 사용 중인 세탁기입니다.")
+        return redirect('washing_machine:status')
 
-        ocr_result = img_ocr(img)
-        
-        if ocr_result is not None:
-            Usage_Status.objects.create(
-                machine_id=machine,
-                user_id=request.user,
-                start_time=current_time,
-                modified_time=current_time,
-                end_time=current_time + datetime.timedelta(minutes=ocr_result),
-                done=False
-            )
-            return redirect('washing_machine:add')
+    ocr_result = img_ocr(img)
+    
+    if ocr_result is not None:
+        Usage_Status.objects.create(
+            machine_id=machine,
+            user_id=request.user,
+            start_time=current_time,
+            modified_time=current_time,
+            end_time=current_time + datetime.timedelta(minutes=ocr_result),
+            done=False
+        )
+        messages.warning(request, "등록이 완료되었습니다.")
+        return redirect('washing_machine:status')
 
     messages.warning(request, "다시 촬영해주세요.")
     return redirect('washing_machine:status')
@@ -94,7 +97,8 @@ def reserve(request):
                 reservation_time=current_time,
                 done=False
             )
-            return redirect('washing_machine:add')
+            messages.warning(request, "등록이 완료되었습니다.")
+            return redirect('washing_machine:status')
 
     messages.warning(request, "다시 촬영해주세요.")
     return redirect('washing_machine:status')
