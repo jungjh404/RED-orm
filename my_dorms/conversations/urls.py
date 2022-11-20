@@ -5,5 +5,5 @@ app_name = "conversations"
 
 urlpatterns = [
     path('', views.chat_view, name='conversations'),
-    path("<str:room_name>/", views.room_view, name="room"),  # /chat/room_number/ 으로 넘어오면 room 함수 실행
+    path("<str:room_name>/", views.room_view, name="room"),  # /conversations/room_number/ 으로 넘어오면 room 함수 실행
 ]

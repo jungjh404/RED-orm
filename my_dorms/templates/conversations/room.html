@@ -1,43 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../static/css/conversations.css"/>
+{% load static %}
 
-    <title>Chat Room</title>
-</head>
 <body>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <div class="chatting_upper_box">
+        <div class="chatting_room_name" type="button" onClick="history.go(-1)" style="float: left; margin-left: 10px; width: 60px;"><</div> 
+        <div class="chatting_room_name">
+            익명 님의 채팅방
+        </div>
+    </div>
+    
     <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-6">
+        <div class="">
+            <div class="">
                 <div class="form-group">
-                    <img src="{{ user_profile }}" alt=""/>
-                    <label for="exampleFormControlTextarea1" class="h4 pt-5">
-                        옆방에서 온 메시지</label>
-                    <div class="form-control" id="chat-log" cols="100" rows="20" readonly></div><br>
+                    
+                    <div class="form-control chatting_content" id="message-log" cols="100" rows="20" readonly></div><br>
+                    <script>
+                            
+                    </script>
                 </div>
-                <div class="form-group">
-                    <input class="form-control" id="chat-message-input" type="text" size="100"><br>
+                <div class="chatting_under_box form-group">
+                    <div class="chatting_input_area">
+                        <input id="chat-message-input" rows="1"></input>
+                    </div>
+                    <div class="chatting_button_area">
+                        <button id="chat-message-submit"></button>
+                    </div>
                 </div>
-                <input class="btn btn-secondary btn-lg btn-block" id="chat-message-submit" type="button" value="Send">
             </div>
         </div>
     </div>
-    <!--room_name 을 핸들링 하는 json script-->
     {{ room_name|json_script:"room-name" }}
     {{ user.username|json_script:"user_email" }}
     {{ user.id|json_script:"user_id" }}
     
     <script>
-        // JSON.parse() 메소드 : json 문자열의 구문을 분석하고 결과로 javascript 값이나 객체 생성
+        // json 문자열 분석, js 값과 객체 생성하는 JSON.parse() 함수
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
         const user_email = JSON.parse(document.getElementById('user_email').textContent);
         const user_id = JSON.parse(document.getElementById('user_id').textContent);
     
-        // chatSocket 변수에 생선된 webSocket 할당 / ws://ws/chat/roomName
-        const chatSocket = new WebSocket(
+        // convSocket 변수ㄴ에 webSocket을 할당하는과정 / ws://ws/conversations/"room_name"
+        const convSocket = new WebSocket(
             'ws://'
             + window.location.host
             + '/ws/conversations/'
@@ -45,13 +49,13 @@
             + '/'
         );
     
-        // chatSocket에 onopen 메소드 지정
-        chatSocket.onopen = function (e) {
+        // convSocket에 onopen 메소드 지정
+        convSocket.onopen = function (e) {
             fetchMessages();
         }
     
-        // chat-log id를 통해서 기존 message 에 추가해서 message 를 onmessage 해줌
-        chatSocket.onmessage = function (e) {
+        // message-log id를 통해서 기존 message 에 추가해서 message 를 onmessage 해줌
+        convSocket.onmessage = function (e) {
             const data = JSON.parse(e.data);
             if (data['command'] === 'messages') {
                 for (let i = 0; i < data['messages'].length; i++) {
@@ -60,26 +64,27 @@
             } else if (data['command'] === 'new_message') {
                 createMessage(data['message']);
             }
+            const $messageTextBox = document.querySelector('#message-log');
+            $messageTextBox.scrollTop = $messageTextBox.scrollHeight;
         };
     
-        // 에러났을 때는 onclose
-        chatSocket.onclose = function (e) {
+        // error handling
+        convSocket.onclose = function (e) {
             console.error('Chat socket closed unexpectedly');
         };
     
-        // 엔터를 눌러도 click 이벤트가 발생하게 처리
+        // 엔터를 누를시 click event trigger
         document.querySelector('#chat-message-input').onkeyup = function (e) {
-            if (e.keyCode === 13) {  // enter, return
+            if (e.keyCode === 13) {  
                 document.querySelector('#chat-message-submit').click();
             }
         };
     
-        // onclick 이벤트가 발생하면 input value를 message에 저장해서 json형태로 chatSocket으로 전송
-        // chatSocket 전송이 완료되면 input box value 를 공백으로 초기화
+        // onclick 이벤트 발생시 사용자가 입력한 값을 message에 저장, 그 후 json형태로 convSocket으로 전송
         document.querySelector('#chat-message-submit').onclick = function (e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
-            chatSocket.send(JSON.stringify({
+            convSocket.send(JSON.stringify({
                 'message': message,
                 'user': user_email,
                 'user_id': user_id,
@@ -89,17 +94,16 @@
         };
     
         function fetchMessages() {
-            chatSocket.send(JSON.stringify({'command': 'fetch_messages'}))
+            convSocket.send(JSON.stringify({'command': 'fetch_messages'}))
         }
     
         function createMessage(data) {
             const author = data['author'];
             if(author == "{{user.username}}"){
-                document.querySelector('#chat-log').innerHTML += '<div class="me chatmsg">'+(author + ': ' + data.content + '\n')+ '</div>';
+                document.querySelector('#message-log').innerHTML += '<div class="my_chat chatmsg">'+('Me' + ': ' + data.content + '\n')+ '</div>';
             }else{
-                document.querySelector('#chat-log').innerHTML +='<div class="notMe chatmsg">'+ (author + ': ' + data.content + '\n')+ '</div>';
+                document.querySelector('#message-log').innerHTML +='<div class="other_chat chatmsg">'+ (author + ': ' + data.content + '\n')+ '</div>';
             }
         }
     </script>
 </body>
-</html>

@@ -54,12 +54,11 @@ class ConversationsConsumer(WebsocketConsumer):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = "conversations_%s" % self.room_name
 
-        # Join room group
+        
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
             self.channel_name
         )
-        # websocket 연결을 수락 / connect() 메서드 내에서 accept()를 호출하지 않으면 연결이 거부되고 닫힌다.
         self.accept()
 
     def disconnect(self, close_code):
@@ -86,9 +85,6 @@ class ConversationsConsumer(WebsocketConsumer):
     def send_message(self, message):
         self.send(text_data=json.dumps(message))
 
-    # Receive message from room group
     def chat_message(self, event):
         message = event["message"]
-
-        # Send message to WebSocket
         self.send(text_data=json.dumps(message))

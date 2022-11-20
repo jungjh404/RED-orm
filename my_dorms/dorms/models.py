@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from core.models import TimeStampedModel
 User = get_user_model()
 # Create your models here.
 class Context (models.Model) :
@@ -90,6 +90,8 @@ class Comment_trade (models.Model) :
 
 
 #돔메 구인
+class Dormmate_offer(TimeStampedModel):
+    
 
 #공동 구매
 class Context_copur (models.Model) :
